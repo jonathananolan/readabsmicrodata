@@ -1,22 +1,19 @@
+#' Import SIH data
+#'
+#' This function allows you to clean SIH data.
+#' @param data a vector containing all the SIH years you want to import.
+#' @keywords SIH
+#' @export
+#' @examples
+#' @import dplyr
+#' @importFrom  grattan weighted_ntile
 
-#Program: BPIR
-#Report: Wealth of Generations 2.0
-#Purpose: To calculate income and wealth across age groups and years from SIH data
-#Data sources: SIH microdata
-
-# Install packages
-#install.packages("dplyr")
-
-# Load packages
-library(dplyr) # for data manipulation
-library(grattan) # for decile creation
 
 
 ### Read in data ----
 # Set working directory
 
-data <- read.csv("SIH.raw.csv")
-
+clean_SIH<- function(data) {
 
 ### Clean-up -----
 
@@ -66,13 +63,13 @@ data.iu<- data.iu %>%
   group_by(hh.id.unique) %>%
   summarise(refyear = max(refyear),
             age.code.1 = max(age.code.1),   ##double check
-            persons = sum(persons), 
+            persons = sum(persons),
             persons.under.15 = sum(persons.under.15),
             persons.15.64 = sum(persons.15.64),
             persons.65.plus = sum(persons.65.plus),
             total.income.0304 = sum(total.income.0304),
-            tax.weekly = sum(tax.weekly), 
-            tax.annual = sum(tax.annual), 
+            tax.weekly = sum(tax.weekly),
+            tax.annual = sum(tax.annual),
             weight.10000 = mean(weight.10000),
             income.unit.count = max(income.unit.type))
 
@@ -90,7 +87,7 @@ data.clean<- data.clean %>%
          persons = ifelse(is.na(persons.x), persons.y, persons.x),
          persons.under.15 = ifelse(is.na(persons.under.15.x), persons.under.15.y, persons.under.15.x),
          persons.15.64 = ifelse(is.na(persons.15.64.y), persons.15.64.x, persons.15.64.y),
-         persons.65.plus = ifelse(is.na(persons.65.plus.y), persons.65.plus.x, persons.65.plus.y), 
+         persons.65.plus = ifelse(is.na(persons.65.plus.y), persons.65.plus.x, persons.65.plus.y),
          weight.10000 = ifelse(is.na(weight.10000.x), weight.10000.y, weight.10000.x),
          total.income.0304 = ifelse(is.na(total.income.0304.x), total.income.0304.y, total.income.0304.x),
          tax.weekly = ifelse(is.na(tax.weekly.x), tax.weekly.y, tax.weekly.x),
@@ -126,7 +123,7 @@ data.clean<- data.clean %>%
 
 ## Adjust tax for 1986
 # 1986 lists tax as yearly instead of weekly
-data.clean<- data.clean %>% 
+data.clean<- data.clean %>%
   mutate(tax = ifelse(is.na(tax.weekly), tax.annual/365*7, tax.weekly))
 
 
@@ -136,22 +133,22 @@ data.clean<- data.clean %>%
 # age.test1<- data.clean %>%
 #   filter(refyear == c("1986","1990"))
 # unique(age.test1$age.code.1) #should be no NAs
-# 
+#
 # age.test2<- data.clean %>%
 #   filter(refyear == c("1995","2000"))
 # unique(age.test2$age.code.2) #should be no NAs
-# 
+#
 # age.test3<- data.clean %>%
 #   filter(refyear == c("2005", "2007", "2009", "2011", "2013"))
 # unique(age.test3$age.code.3) #should be no NAs
-# 
+#
 # age.test4<- data.clean %>%
 #   filter(refyear == "2015")
 # unique(age.test4$age) #should be no NAs
 
 
 # Convert age codes to a meaningful age description
-data.clean<- data.clean %>% 
+data.clean<- data.clean %>%
   mutate(age.desc = case_when(age.code.1 == 1 ~ "15 years",
                               age.code.1 == 2 ~ "16-17 years",
                               age.code.1 == 3 ~ "18-20 years",
@@ -167,7 +164,7 @@ data.clean<- data.clean %>%
                               age.code.1 == 13 ~ "65-69 years",
                               age.code.1 == 14 ~ "70-74 years",
                               age.code.1 == 15 ~ "75 years plus",
-    
+
                               age.code.2 == 1 ~ "15 years",
                               age.code.2 == 2 ~ "16 years",
                               age.code.2 == 3 ~ "17 years",
@@ -197,7 +194,7 @@ data.clean<- data.clean %>%
                               age.code.2 == 27 ~ "65-69 years",
                               age.code.2 == 28 ~ "70-74 years",
                               age.code.2 == 29 ~ "75 years plus",
-                          
+
                               age.code.3 == 1 ~ "15 years",
                               age.code.3 == 2 ~ "16 years",
                               age.code.3 == 3 ~ "17 years",
@@ -233,17 +230,17 @@ data.clean<- data.clean %>%
 
 
 # Create a single numeric variable for age (can only be approximate)
-data.clean<- data.clean %>% 
-  mutate(age.approx = ifelse(is.na(age), 
+data.clean<- data.clean %>%
+  mutate(age.approx = ifelse(is.na(age),
                              as.numeric(gsub(".*([0-9]{2})\\syears.*", "\\1", age.desc)),
                              age))
 
-summary(data.clean$age.approx) 
+summary(data.clean$age.approx)
 #NB: this is not necessarily true age, 34 could mean: age 34 OR age group 30-34
 #there should no NAs -- fix before proceeding
 #there should be no age under 15 or over 85
 
-data.clean<- data.clean %>% 
+data.clean<- data.clean %>%
   mutate(age.group = case_when(age.approx < 25 ~ "15-24",
                                age.approx < 35 ~ "25-34",
                                age.approx < 45 ~ "35-44",
@@ -287,7 +284,7 @@ data.clean <- data.clean %>%
                                        TRUE ~ NA_real_))
 
 
-## Calculate a single measure of disposable income for all years 
+## Calculate a single measure of disposable income for all years
 # The Medicare levy surcharge has been calculated and deducted from gross income in the calculation of disposable income since the 2007-08 cycle of SIH
 # This means disposable.income.0708 is a better measure of disposable income, but only available for some years
 
@@ -308,12 +305,12 @@ scale$X<- NULL
 scale$mean.disp.inc.0304<- NULL
 scale$mean.disp.inc.0708<- NULL
 
-data.clean<- data.clean %>% 
+data.clean<- data.clean %>%
   mutate(age.for.deciles = case_when(age.approx < 25 ~ "Under 25",
                                      age.approx < 65 ~ "25-64",
                                      TRUE ~ "Over 65"))
 
-data.clean <- data.clean %>% 
+data.clean <- data.clean %>%
   group_by(age.for.deciles) %>%
   mutate(disp.inc.decile.weighted.age3 = weighted_ntile(disposable.income.0304, weights= weight.final, 10))
 
@@ -404,7 +401,5 @@ nrow(wealth.check.nomatch)/nrow(wealth.check)*100 #only 1.1% don't match (all in
 
 data.clean$X<- NULL
 
-write.csv(data.clean, "SIH.clean.csv")
-
-
+return(data.clean) }
 

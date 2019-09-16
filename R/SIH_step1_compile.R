@@ -9,7 +9,7 @@
 #' @import dplyr
 #' @import purrr
 
-import_sih<- function(data_directory=getwd()){
+import_sih_hh<- function(data_directory=getwd()) {
     ### Read in data ----
 
     #var.names<-read.csv(paste0(data_directory,"/HESvariables/HESkeyvariablenames.csv"), stringsAsFactors=FALSE)
@@ -23,13 +23,14 @@ years_HH <- c("1995","2000","2003","2005","2007","2009","2011","2013","2015")
 years_IU <- c("1986","1990")
 
 ### HH ###
-for (Years in years_HH) {
+
+sih_importer_hh <- function(Years,...)  {
 
     Yearchar <- as.character(Years)
     Year <- as.numeric(Yearchar)
 
     # Read in the data
-    SIH.raw <-  read_sas(file.names$Filename[file.names$Year==Year])
+    SIH.raw <-  read.dta(paste0(data_directory,"/",file.names$Filename[file.names$Year==Year]))
 
     #change column names to a common one.
     Columname <- paste0("SIH", Yearchar)
@@ -59,11 +60,14 @@ for (Years in years_HH) {
         data.SIH <- bind_rows(data.SIH, SIH.raw)
     }
 
-}#end for loop
+hh<- map_df(years_hh,sih_importer_hh) }
+
+
 
 ### IU ###
 
-for (Years in years_IU) {
+import_sih_hh<- function(data_directory=getwd()) {
+
     Yearchar <- as.character(Years)
     Year <- as.numeric(Yearchar)
 
@@ -96,4 +100,8 @@ for (Years in years_IU) {
 
 }#end for loop
 
+iu<- map_df(years_IU,import_sih_hh)
+
+bind_rows(iu,hh)
 }
+
