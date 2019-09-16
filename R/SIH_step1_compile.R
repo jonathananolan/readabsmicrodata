@@ -9,15 +9,15 @@
 #' @import dplyr
 #' @import purrr
 
-import_S<- function(data_directory=getwd()){
-
+import_sih<- function(data_directory=getwd()){
     ### Read in data ----
 
     #var.names<-read.csv(paste0(data_directory,"/HESvariables/HESkeyvariablenames.csv"), stringsAsFactors=FALSE)
     #file.names<-read.csv(paste0(data_directory,"/HESvariables/filenames.csv"), stringsAsFactors=FALSE)
 
-var.names <- read.csv("SIHvariables/SIHkeyvariablenames.csv", stringsAsFactors=FALSE)
-file.names<-read.csv("SIHvariables/filenamesSIH.csv", stringsAsFactors=FALSE)
+var.names  <- read.csv(system.file("extdata", "SIHkeyvariablenames.csv", package = "readabsmicrodata", mustWork = TRUE), stringsAsFactors=FALSE)
+file.names <- read.csv(system.file("extdata", "SIHfilenames.csv",        package = "readabsmicrodata", mustWork = TRUE), stringsAsFactors=FALSE)
+
 
 years_HH <- c("1995","2000","2003","2005","2007","2009","2011","2013","2015")
 years_IU <- c("1986","1990")
@@ -96,6 +96,4 @@ for (Years in years_IU) {
 
 }#end for loop
 
-### Export data -----
-
-write.csv(data.SIH, "SIH.raw.csv")
+}

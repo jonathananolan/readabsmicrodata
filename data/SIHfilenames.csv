@@ -1,0 +1,12 @@
+Year,Filename,Comment
+1986,data/ids86unt.sas7bdat,IU used as no HH level data make sure to calculate correct equivilisation factor and weights
+1990,data/ids90unt.sas7bdat,IU used as no HH level data make sure to calculate correct equivilisation factor and weights
+1995,data/ids95hsh.sas7bdat,
+2000,data/ids00hsh.sas7bdat,
+2003,data/sih03bh.sas7bdat,
+2005,data/sih05bh64.sas7bdat,
+2007,data/sih08bh.sas7bdat,
+2009,data/sih10bh.sas7bdat,
+2011,data/sih11bh.sas7bdat,
+2013,data/sih13bh.sas7bdat,
+2015,data/sih15bh.sas7bdat,
