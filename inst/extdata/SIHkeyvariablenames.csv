@@ -66,3 +66,13 @@ income.pensions.allowances.0708,Current weekly HH income from government pension
 income.super,Current weekly HH income from superannuation/annuity/allocated pension,,,,,,,,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH
 income.other.sources,Current weekly HH income from other regular sources (excluding superannuation),,,,,,,,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH
 income.other.sources.incl.WC,Current weekly HH income from other regular sources (excluding superannuation) (incl WC lump sums),,,,,,,,,,OTHSRCH8,OTHSRCH8,OTHSRCH8,OTHSRCH8,OTHSRCH8
+pension.source,,,,,,,,,,,,,,PSINC,PSINC
+fin.stress.comm.org,,,,,,,,,,,,CFWELFAR ,,,CFWELFAR
+fin.stress.pawned,,,,,,,,,,,,CFPAWNSO,,,CFPAWNSO
+fin.stress.family.help,,,,,,,,,,,,CFFAMILY,,,CFFAMILY
+fin.stress.heating,,,,,,,,,,,,CFNOHEAT,,,CFNOHEAT
+fin.stress.skipped.meals,,,,,,,,,,,,CFNOMEAL,,,CFNOMEAL
+fin.stress.late.bills,,,,,,,,,,,,CFELECTR,,,CFELECTR
+fin.stress.late.rego,,,,,,,,,,,,CFREGOIN,,,CFREGOIN
+fin.stress.emergency.money,,,,,,,,,,,,EMGMONEY,,,EMGMONEY
+tenure,,,,,,,,,,TENURECF,TENURECF,TENURECF,TENURECF,TENURECF,TENURECF
