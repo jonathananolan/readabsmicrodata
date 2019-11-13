@@ -16,54 +16,77 @@ clean_HES<- function(data) {
 # Some ages are grouped, some are single years -- let's split them out into a single age number.
 
 data<- data %>%
-  mutate(age.approx = as.numeric(gsub(".*([0-9]{2})\\syears.*",    # retreive single numeric for age
+  mutate(age_approx = as.numeric(gsub(".*([0-9]{2})\\syears.*",    # retreive single numeric for age
                                                        "\\1",
-                                                       age.desc)))
+                                                       age_desc)))
 data<- data %>%
-  mutate(age.group = case_when(age.approx < 25 ~ "15-24",
-                               age.approx < 35 ~ "25-34",
-                               age.approx < 45 ~ "35-44",
-                               age.approx < 55 ~ "45-54",
-                               age.approx < 65 ~ "55-64",
-                               age.approx < 75 ~ "65-74",
-                               TRUE ~ "75 and over"))
+  mutate( age_20 = case_when(age_approx < 25 ~ "15-24",
+                            age_approx  < 45 ~ "25-44",
+                            age_approx  < 45 ~ "45-64",
+                            age_approx  < 55 ~ "64-85",
+                                        TRUE ~ "85 and over"),
+          age_10 = case_when(age_approx < 25 ~ "15-24",
+                               age_approx < 35 ~ "25-34",
+                               age_approx < 45 ~ "35-44",
+                               age_approx < 55 ~ "45-54",
+                               age_approx < 65 ~ "55-64",
+                               age_approx < 75 ~ "65-74",
+                               age_approx < 85 ~ "75-84",
+                               TRUE ~ "85 and over"),
+         age_5 = case_when(age_approx < 20 ~ "15-19",
+                           age_approx < 25 ~ "20-24",
+                           age_approx < 30 ~ "25-29",
+                           age_approx < 35 ~ "30-34",
+                           age_approx < 40 ~ "35-39",
+                           age_approx < 45 ~ "40-44",
+                           age_approx < 50 ~ "45-49",
+                           age_approx < 55 ~ "50-54",
+                           age_approx < 60 ~ "55-59",
+                           age_approx < 65 ~ "60-64",
+                           age_approx < 70 ~ "65-69",
+                           age_approx < 75 ~ "70-74",
+                           age_approx < 80 ~ "75-79",
+                           age_approx < 85 ~ "80-84",
+                           TRUE ~ "85 and over"))
+
 
 
 ## Get rid of cents and replace them with dollars
 
 data<- data %>%
   mutate(
-    exp.housing     = ifelse(is.na(exp.housing), exp.housing.cents/100, exp.housing),
-    exp.fuel        = ifelse(is.na(exp.fuel), exp.fuel.cents/100, exp.fuel),
-    exp.food        = ifelse(is.na(exp.food), exp.food.cents/100, exp.food),
-    exp.alcohol     = ifelse(is.na(exp.alcohol), exp.alcohol.cents/100, exp.alcohol),
-    exp.tobacco     = ifelse(is.na(exp.tobacco), exp.tobacco.cents/100, exp.tobacco),
-    exp.clothing    = ifelse(is.na(exp.clothing), exp.clothing.cents/100, exp.clothing),
-    exp.furnishings = ifelse(is.na(exp.furnishings), exp.furnishings.cents/100, exp.furnishings),
-    exp.hhservices  = ifelse(is.na(exp.hhservices), exp.hhservices.cents/100, exp.hhservices),
-    exp.medical     = ifelse(is.na(exp.medical), exp.medical.cents/100, exp.medical),
-    exp.transport   = ifelse(is.na(exp.transport), exp.transport.cents/100, exp.transport),
-    exp.recreation  = ifelse(is.na(exp.recreation), exp.recreation.cents/100, exp.recreation),
-    exp.personal    = ifelse(is.na(exp.personal), exp.personal.cents/100, exp.personal),
-    exp.misc        = ifelse(is.na(exp.misc), exp.misc.cents/100, exp.misc),
-    exp.tax         = ifelse(is.na(exp.tax), exp.tax.cents/100, exp.tax),
-    exp.mortgage    = ifelse(is.na(exp.mortgage), exp.mortgage.cents/100, exp.mortgage),
-    exp.ochc        = ifelse(is.na(exp.ochc), exp.ochc.cents/100, exp.ochc),
-    exp.super       = ifelse(is.na(exp.super), exp.super.cents/100, exp.super),
-    exp.total.g.s   = ifelse(is.na(exp.total.g.s), exp.total.g.s.cents/100, exp.total.g.s),
-    exp.total       = ifelse(is.na(exp.total), exp.total.cents/100, exp.total),
-    total.benefits  = ifelse(is.na(total.benefits), total.benefits.cents/100, total.benefits),
-    total.ind.benefits  = ifelse(is.na(total.ind.benefits), total.ind.benefits.cents/100, total.ind.benefits),
-    ind.health      = ifelse(is.na(ind.health), ind.health.cents/100, ind.health),
-    ind.edu         = ifelse(is.na(ind.edu), ind.edu.cents/100, ind.edu),
-    ind.welfare     = ifelse(is.na(ind.welfare), ind.welfare.cents/100, ind.welfare),
-    total.taxes     = ifelse(is.na(total.taxes), total.taxes.cents/100, total.taxes))
+    exp_housing     = ifelse(is.na(exp_housing), exp_housing_cents/100, exp_housing),
+    exp_fuel        = ifelse(is.na(exp_fuel), exp_fuel_cents/100, exp_fuel),
+    exp_food        = ifelse(is.na(exp_food), exp_food_cents/100, exp_food),
+    exp_alcohol     = ifelse(is.na(exp_alcohol), exp_alcohol_cents/100, exp_alcohol),
+    exp_tobacco     = ifelse(is.na(exp_tobacco), exp_tobacco_cents/100, exp_tobacco),
+    exp_clothing    = ifelse(is.na(exp_clothing), exp_clothing_cents/100, exp_clothing),
+    exp_furnishings = ifelse(is.na(exp_furnishings), exp_furnishings_cents/100, exp_furnishings),
+    exp_hhservices  = ifelse(is.na(exp_hhservices), exp_hhservices_cents/100, exp_hhservices),
+    exp_medical     = ifelse(is.na(exp_medical), exp_medical_cents/100, exp_medical),
+    exp_transport   = ifelse(is.na(exp_transport), exp_transport_cents/100, exp_transport),
+    exp_recreation  = ifelse(is.na(exp_recreation), exp_recreation_cents/100, exp_recreation),
+    exp_personal    = ifelse(is.na(exp_personal), exp_personal_cents/100, exp_personal),
+    exp_misc        = ifelse(is.na(exp_misc), exp_misc_cents/100, exp_misc),
+    exp_tax         = ifelse(is.na(exp_tax), exp_tax_cents/100, exp_tax),
+    exp_mortgage    = ifelse(is.na(exp_mortgage), exp_mortgage_cents/100, exp_mortgage),
+    exp_ochc        = ifelse(is.na(exp_ochc), exp_ochc_cents/100, exp_ochc),
+    exp_super       = ifelse(is.na(exp_super), exp_super_cents/100, exp_super),
+    exp_total_g_s   = ifelse(is.na(exp_total_g_s), exp_total_g_s_cents/100, exp_total_g_s),
+    exp_total       = ifelse(is.na(exp_total), exp_total_cents/100, exp_total),
+    total_benefits  = ifelse(is.na(total_benefits), total_benefits_cents/100, total_benefits),
+    total_ind_benefits  = ifelse(is.na(total_ind_benefits), total_ind_benefits_cents/100, total_ind_benefits),
+    ind_health      = ifelse(is.na(ind_health), ind_health_cents/100, ind_health),
+    ind_edu         = ifelse(is.na(ind_edu), ind_edu_cents/100, ind_edu),
+    ind_welfare     = ifelse(is.na(ind_welfare), ind_welfare_cents/100, ind_welfare),
+    total_taxes     = ifelse(is.na(total_taxes), total_taxes_cents/100, total_taxes))
 
 
 ## Adjust weights
 
 data<- data %>%
-  mutate(weight.final = ifelse(is.na(weight), weight.10000/10000, weight))
+  mutate(weight = ifelse(is.na(weight), weight_10000/10000, weight)) %>%
+  select(-weight_10000)
 
 
 ## Create equivalising factor for earlier years
@@ -71,7 +94,7 @@ data<- data %>%
 # check: unique(data$hhsize)
 
 data<- data %>%
-  mutate(Persons = case_when(hhsize %in% c(1, "1 person", "One person") ~ 1,
+  mutate(persons = case_when(hhsize %in% c(1, "1 person", "One person") ~ 1,
                              hhsize %in% c(2, "2 persons", "Two persons") ~ 2,
                              hhsize %in% c(3, "3 persons", "Three persons") ~ 3,
                              hhsize %in% c(4, "4 persons", "Four persons") ~ 4,
@@ -84,20 +107,20 @@ data<- data %>%
                              is.na(hhsize) ~ NA_real_,
                              TRUE ~ 0))
 
-# check unique(data$persons.15.over)
+# check unique(data$persons_15_over)
 
 data<- data %>%
-  mutate(Adults = case_when(persons.15.over %in% c(1, "1 person aged 15 years and over") ~ 1,
-                            persons.15.over %in% c(2, "2 persons aged 15 years and over") ~ 2,
-                            persons.15.over %in% c(3, "3 persons aged 15 years and over") ~ 3,
-                            persons.15.over %in% c(4, "4 persons aged 15 years and over") ~ 4,
-                            persons.15.over %in% c(5, "5 persons aged 15 years and over") ~ 5,
-                            persons.15.over %in% c(6, "6 persons aged 15 years and over") ~ 6,
-                            persons.15.over == 7 ~ 7,
-                            is.na(persons.15.over) ~ NA_real_,
+  mutate(persons_15_over = case_when(persons_15_over %in% c(1, "1 person aged 15 years and over") ~ 1,
+                            persons_15_over %in% c(2, "2 persons aged 15 years and over") ~ 2,
+                            persons_15_over %in% c(3, "3 persons aged 15 years and over") ~ 3,
+                            persons_15_over %in% c(4, "4 persons aged 15 years and over") ~ 4,
+                            persons_15_over %in% c(5, "5 persons aged 15 years and over") ~ 5,
+                            persons_15_over %in% c(6, "6 persons aged 15 years and over") ~ 6,
+                            persons_15_over == 7 ~ 7,
+                            is.na(persons_15_over) ~ NA_real_,
                             TRUE ~ 0))
 
-# HES 88 & 93 are NA for persons.15.over -- need to add in d1 to d4 variables
+# HES 88 & 93 are NA for persons_15_over -- need to add in d1 to d4 variables
 
 data<- data %>%
   mutate(d1age = case_when(d1age %in% c(1,"One person", "1 peson") ~ 1,
@@ -132,8 +155,10 @@ data<- data %>%
 
 data<- data %>%
   mutate(persons.under.15 = d1age + d2age + d3age + d4age,
-         Adults = ifelse(is.na(Adults), Persons-persons.under.15, Adults),
-         hh.equiv.derived = (1 + 0.5 * (Adults - 1) + 0.3 * (Persons-Adults)))
+         persons_15_over = ifelse(is.na(persons_15_over), persons-persons.under.15, persons_15_over),
+         hh_equiv_derived = (1 + 0.5 * (persons_15_over - 1) + 0.3 * (persons-persons_15_over)),
+         hh_equiv = ifelse(is.na(hh_equiv_derived),hh_equiv,hh_equiv_derived)) %>%
+         select(-hh_equiv_derived,-persons.under.15)
 
 
 
@@ -142,90 +167,52 @@ data<- data %>%
 ## Create total g+s exp variable for earlier years
 data<- data %>%
   mutate(
-    exp.total.g.s = ifelse(is.na(exp.total.g.s),
-        exp.housing+
-        exp.fuel+
-        exp.food+
-        exp.alcohol+
-        exp.tobacco+
-        exp.clothing+
-        exp.furnishings+
-        exp.hhservices+
-        exp.medical+
-        exp.transport+
-        exp.recreation+
-        exp.personal+
-        exp.misc, exp.total.g.s))
+    exp_total_g_s = ifelse(is.na(exp_total_g_s),
+        exp_housing+
+        exp_fuel+
+        exp_food+
+        exp_alcohol+
+        exp_tobacco+
+        exp_clothing+
+        exp_furnishings+
+        exp_hhservices+
+        exp_medical+
+        exp_transport+
+        exp_recreation+
+        exp_personal+
+        exp_misc, exp_total_g_s))
 
 ## Create total exp variable for earlier years
 data<- data %>%
   mutate(
-    exp.total = ifelse(is.na(exp.total),
-                             exp.housing+
-                             exp.fuel+
-                             exp.food+
-                             exp.alcohol+
-                             exp.tobacco+
-                             exp.clothing+
-                             exp.furnishings+
-                             exp.hhservices+
-                             exp.medical+
-                             exp.transport+
-                             exp.recreation+
-                             exp.personal+
-                             exp.misc+
-                             exp.tax+
-                             exp.mortgage+
-                             exp.ochc+
-                             exp.super, exp.total))
+    exp_total = ifelse(is.na(exp_total),
+                             exp_housing+
+                             exp_fuel+
+                             exp_food+
+                             exp_alcohol+
+                             exp_tobacco+
+                             exp_clothing+
+                             exp_furnishings+
+                             exp_hhservices+
+                             exp_medical+
+                             exp_transport+
+                             exp_recreation+
+                             exp_personal+
+                             exp_misc+
+                             exp_tax+
+                             exp_mortgage+
+                             exp_ochc+
+                             exp_super, exp_total))
 
-## Create equivalised variables
-data<- data %>%
-  mutate(
-    inc.total.equiv = tot.income / hh.equiv.derived,
-    inc.disp.equiv = disp.income / hh.equiv.derived,
-    net.wealth.equiv = net.wealth / hh.equiv.derived,
-    exp.total.equiv = exp.total / hh.equiv.derived)
 
 ## Expenditure less tax
-data$exp.less.tax<- data$exp.total - data$exp.tax
+data$exp_less.tax<- data$exp_total - data$exp_tax
 
-# The ABS adjusts all negative disposable income to zero for its calculation of equivalised disposable income
-# Source: Explanatory notes, 2015-16 HES, http://www.abs.gov.au/AUSSTATS/abs@.nsf/Lookup/6530.0Explanatory%20Notes12015-16?OpenDocument
+
+# delete 'cents' variables that are not required
+
 data<- data %>%
-  mutate(
-    disp.income.ABS = ifelse(disp.income < 0, 0, disp.income),
-    inc.disp.equiv.ABS = (disp.income.ABS / hh.equiv.derived),
-    exp.total.ABS = ifelse(exp.total < 0, 0, exp.total),
-    exp.total.equiv.ABS = (exp.total.ABS / hh.equiv.derived),
-    exp.less.tax.ABS = ifelse(exp.less.tax < 0, 0, exp.less.tax),
-    exp.less.tax.equiv.ABS = (exp.less.tax.ABS / hh.equiv.derived),
-    exp.total.g.s.ABS = ifelse(exp.total.g.s < 0, 0, exp.total.g.s),
-    exp.total.g.s.equiv.ABS = (exp.total.g.s.ABS / hh.equiv.derived))
-
-## Create savings variables
-data<- data %>%
-  mutate(
-    Hh.savings = disp.income - exp.total.g.s, #don't include super, mortgage or other capital housing costs as these are investments; don't include tax
-    Hh.savings.equiv = Hh.savings / hh.equiv.derived,
-    Hh.savings.ABS = disp.income.ABS - exp.total.g.s.ABS,
-    Hh.savings.equiv.ABS = Hh.savings.ABS / hh.equiv.derived,
-    Hh.savings.rate.equiv.disp = (Hh.savings / disp.income) / hh.equiv.derived,
-    Hh.savings.rate.equiv.disp.ABS = (Hh.savings.ABS / disp.income.ABS) / hh.equiv.derived)
-
-#NA's created by zero divided by zero -> convert these to zero; note some Inf also created, we've kept these in the data but excluded them when calculating averages
-data<- data %>%
-  mutate(
-    Hh.savings.rate.equiv.disp = ifelse(is.na(Hh.savings.rate.equiv.disp), 0, Hh.savings.rate.equiv.disp),
-    Hh.savings.rate.equiv.disp.ABS = ifelse(is.na(Hh.savings.rate.equiv.disp.ABS), 0, Hh.savings.rate.equiv.disp.ABS))
-
-
-## Create tax and transfer variables
-data<- data %>%
-  mutate(net.benefits = total.benefits - total.taxes,
-         net.benefits.equiv = net.benefits / hh.equiv.derived)
-
-
+              select(-contains("_cents"))
 ### Export -----
 
 data$X<- NULL

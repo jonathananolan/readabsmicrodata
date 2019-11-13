@@ -6,20 +6,18 @@
 #' @export
 #' @examples
 #' @import dplyr
-#' @importFrom  grattan weighted_ntile
+#' @importFrom grattandata read_microdata
+#'
 
+SIH_unique_hh <- function(data) {
+  data %>% mutate(hh_id_unique = paste(refyear, hh.id, sep = "-"))}
 
-
-### Read in data ----
-# Set working directory
-
-clean_SIH<- function(data) {
+  clean_SIH<- function(data) {
 
 ### Clean-up -----
 
 ## Unique household ID (hh ids repeat in 1995 and 2000)
 
-data$hh.id.unique<- paste(data$refyear, data$hh.id, sep = "-")
 
 #check
 #nrow(data) - length(unique(data$hh.id.unique)) #6859 (extra rows due to income units in 1986 and 1990)
@@ -34,121 +32,68 @@ data$hh.id.unique<- paste(data$refyear, data$hh.id, sep = "-")
 # Looking at 2011 and 2015 SIH, all IU weights within a HH are identical to each other and to the HH weight
 # So we can take the average of IU weights to correctly identify the HH weight
 
-# Exclude income unit type = 0 (no data)
-data<- data %>%
-  mutate(income.unit.zero = ifelse(income.unit.type == 0, T, F),
-         income.unit.zero = ifelse(is.na(income.unit.zero), F, income.unit.zero))
 
-data<- data %>%
-  filter(income.unit.zero == F)
+# Separate income unit data (1986 and 1990) from rest, and delete income_unit=0 which are all empty rows.
+data_hh<- data %>%
+  filter(is.na(income_unit_type))
 
-#checks
-# unique(data$income.unit.type)
-# nrow(data) - length(unique(data$hh.id.unique)) #6801
-
-
-# Separate income unit data (1986 and 1990) from rest
-data.hh<- data %>%
-  filter(is.na(income.unit.type))
-
-data.iu<- data %>%
-  filter(!is.na(income.unit.type))
-
-#checks
-# nrow(data.iu) - length(unique(data.iu$hh.id.unique)) #6801
-# nrow(data.hh) - length(unique(data.hh$hh.id.unique)) #should be zero
+data_iu<- data %>%
+  filter(!is.na(income_unit_type),
+         income_unit_type != 0)
 
 # Summarise income unit data at the household level
-data.iu<- data.iu %>%
-  group_by(hh.id.unique) %>%
+data_iu<- data_iu %>%
+  group_by(hh_id_unique) %>%
   summarise(refyear = max(refyear),
-            age.code.1 = max(age.code.1),   ##double check
+            age_code_1 = max(age_code_1),   ##double check
             persons = sum(persons),
-            persons.under.15 = sum(persons.under.15),
-            persons.15.64 = sum(persons.15.64),
-            persons.65.plus = sum(persons.65.plus),
-            total.income.0304 = sum(total.income.0304),
-            tax.weekly = sum(tax.weekly),
-            tax.annual = sum(tax.annual),
-            weight.10000 = mean(weight.10000),
-            income.unit.count = max(income.unit.type))
+            persons_under_15 = sum(persons_under_15),
+            persons_15_64 = sum(persons_15_64),
+            persons_65_plus = sum(persons_65_plus),
+            total_income_0304 = sum(total_income_0304),
+            tax_weekly = sum(tax_weekly),
+            tax_annual = sum(tax_annual),
+            weight_10000 = mean(weight_10000),
+            income_unit_count = max(income_unit_type))
 
 # Recombine 1986 and 1990 with the rest
-data.clean<- merge(data.hh, data.iu, by="hh.id.unique", all.x=T, all.y=T)
-
-#check
-#nrow(data) - nrow(data.clean) #6801 (check this matches above - i.e. the only rows lost were the income units within a household)
-
-
-#clean up column names post-merge
-data.clean<- data.clean %>%
-  mutate(refyear = ifelse(is.na(refyear.x), refyear.y, refyear.x),
-         age.code.1 = ifelse(is.na(age.code.1.y), age.code.1.x, age.code.1.y),
-         persons = ifelse(is.na(persons.x), persons.y, persons.x),
-         persons.under.15 = ifelse(is.na(persons.under.15.x), persons.under.15.y, persons.under.15.x),
-         persons.15.64 = ifelse(is.na(persons.15.64.y), persons.15.64.x, persons.15.64.y),
-         persons.65.plus = ifelse(is.na(persons.65.plus.y), persons.65.plus.x, persons.65.plus.y),
-         weight.10000 = ifelse(is.na(weight.10000.x), weight.10000.y, weight.10000.x),
-         total.income.0304 = ifelse(is.na(total.income.0304.x), total.income.0304.y, total.income.0304.x),
-         tax.weekly = ifelse(is.na(tax.weekly.x), tax.weekly.y, tax.weekly.x),
-         tax.annual = ifelse(is.na(tax.annual.x), tax.annual.y, tax.annual.x),
-         refyear.x = NULL,
-         refyear.y = NULL,
-         age.code.1.x = NULL,
-         age.code.1.y = NULL,
-         persons.x = NULL,
-         persons.y = NULL,
-         persons.under.15.x = NULL,
-         persons.under.15.y = NULL,
-         persons.15.64.x = NULL,
-         persons.15.64.y = NULL,
-         persons.65.plus.x = NULL,
-         persons.65.plus.y = NULL,
-         total.income.0304.x = NULL,
-         total.income.0304.y = NULL,
-         tax.weekly.x = NULL,
-         tax.weekly.y = NULL,
-         tax.annual.x = NULL,
-         tax.annual.y = NULL,
-         weight.10000.x = NULL,
-         weight.10000.y = NULL,
-         X = NULL)
+data_clean<- bind_rows(data_hh, data_iu)
 
 
 ## Adjust household weights
 # Weights from 1986 to 2000 need to be divided by 10,000
-data.clean<- data.clean %>%
-  mutate(weight.final = ifelse(is.na(weight), weight.10000/10000, weight))
+data_clean<- data_clean %>%
+  mutate(weight = ifelse(is.na(weight), weight.10000/10000, weight))
 
 
 ## Adjust tax for 1986
 # 1986 lists tax as yearly instead of weekly
-data.clean<- data.clean %>%
-  mutate(tax = ifelse(is.na(tax.weekly), tax.annual/365*7, tax.weekly))
+data_clean<- data_clean %>%
+  mutate(tax = ifelse(is.na(tax_weekly), tax_annual/365*7, tax_weekly))
 
 
 ## Age groups
 
 # First check that there are no real NAs for age
-# age.test1<- data.clean %>%
+# age.test1<- data_clean %>%
 #   filter(refyear == c("1986","1990"))
 # unique(age.test1$age.code.1) #should be no NAs
 #
-# age.test2<- data.clean %>%
+# age.test2<- data_clean %>%
 #   filter(refyear == c("1995","2000"))
 # unique(age.test2$age.code.2) #should be no NAs
 #
-# age.test3<- data.clean %>%
+# age.test3<- data_clean %>%
 #   filter(refyear == c("2005", "2007", "2009", "2011", "2013"))
 # unique(age.test3$age.code.3) #should be no NAs
 #
-# age.test4<- data.clean %>%
+# age.test4<- data_clean %>%
 #   filter(refyear == "2015")
 # unique(age.test4$age) #should be no NAs
 
 
 # Convert age codes to a meaningful age description
-data.clean<- data.clean %>%
+data_clean<- data_clean %>%
   mutate(age.desc = case_when(age.code.1 == 1 ~ "15 years",
                               age.code.1 == 2 ~ "16-17 years",
                               age.code.1 == 3 ~ "18-20 years",
@@ -230,17 +175,17 @@ data.clean<- data.clean %>%
 
 
 # Create a single numeric variable for age (can only be approximate)
-data.clean<- data.clean %>%
+data_clean<- data_clean %>%
   mutate(age.approx = ifelse(is.na(age),
                              as.numeric(gsub(".*([0-9]{2})\\syears.*", "\\1", age.desc)),
                              age))
 
-summary(data.clean$age.approx)
+summary(data_clean$age.approx)
 #NB: this is not necessarily true age, 34 could mean: age 34 OR age group 30-34
 #there should no NAs -- fix before proceeding
 #there should be no age under 15 or over 85
 
-data.clean<- data.clean %>%
+data_clean<- data_clean %>%
   mutate(age.group = case_when(age.approx < 25 ~ "15-24",
                                age.approx < 35 ~ "25-34",
                                age.approx < 45 ~ "35-44",
@@ -258,18 +203,18 @@ data.clean<- data.clean %>%
 # For all other years Persons = persons
 
 # Derive equivalising factor
-data.clean<- data.clean %>%
+data_clean<- data_clean %>%
   mutate(Adults = ifelse(is.na(persons.15.over), persons.15.64 + persons.65.plus, persons.15.over),
          Persons = ifelse(is.na(persons), Adults + persons.under.15, persons),
          persons.under.15 = ifelse(is.na(persons.under.15), persons - Adults, persons.under.15),
          hh.equiv.derived = (1 + 0.5 * (Adults - 1) + 0.3 * (persons.under.15)))
 
 #checks
-# unique(data.clean$Adults) #there should be no NAs
-# unique(data.clean$Persons) #there should be no NAs
-# unique(data.clean$persons.under.15) #there should be no NAs
+# unique(data_clean$Adults) #there should be no NAs
+# unique(data_clean$Persons) #there should be no NAs
+# unique(data_clean$persons.under.15) #there should be no NAs
 
-# test<- data.clean %>%
+# test<- data_clean %>%
 #   filter(refyear == c("1986", "2003", "2005", "2007", "2009", "2011", "2013", "2015")) #for whichever years persons was directly imported
 # sum(test$persons) - sum(test$Persons) #should be zero
 
@@ -277,7 +222,7 @@ data.clean<- data.clean %>%
 ### Extra variables -----
 
 # The best available total income measure for each year
-data.clean <- data.clean %>%
+data_clean <- data_clean %>%
   mutate(tot.income.avail = case_when(!is.na(total.income.0708) ~ total.income.0708,
                                        !is.na(total.income.0506) ~ total.income.0506,
                                        !is.na(total.income.0304) ~ total.income.0304,
@@ -289,7 +234,7 @@ data.clean <- data.clean %>%
 # This means disposable.income.0708 is a better measure of disposable income, but only available for some years
 
 # The best available disposable income measure for each year
-data.clean <- data.clean %>%
+data_clean <- data_clean %>%
   mutate(disp.income.avail = case_when(!is.na(disposable.income.0708) ~ disposable.income.0708,
                                        !is.na(disposable.income.0506) ~ disposable.income.0506,
                                        !is.na(disposable.income.0304) ~ disposable.income.0304,
@@ -305,34 +250,34 @@ scale$X<- NULL
 scale$mean.disp.inc.0304<- NULL
 scale$mean.disp.inc.0708<- NULL
 
-data.clean<- data.clean %>%
+data_clean<- data_clean %>%
   mutate(age.for.deciles = case_when(age.approx < 25 ~ "Under 25",
                                      age.approx < 65 ~ "25-64",
                                      TRUE ~ "Over 65"))
 
-data.clean <- data.clean %>%
+data_clean <- data_clean %>%
   group_by(age.for.deciles) %>%
   mutate(disp.inc.decile.weighted.age3 = weighted_ntile(disposable.income.0304, weights= weight.final, 10))
 
 #merge
-data.clean <- merge(data.clean, scale, by = c("age.for.deciles", "disp.inc.decile.weighted.age3"), all.x=T)
+data_clean <- merge(data_clean, scale, by = c("age.for.deciles", "disp.inc.decile.weighted.age3"), all.x=T)
 
 #calculate scaled disp income for earlier years
-data.clean <- data.clean %>%
+data_clean <- data_clean %>%
   mutate(disp.income.scaled = case_when(!is.na(disposable.income.0708) ~ disposable.income.0708,
                                         !is.na(disposable.income.0304) ~ disposable.income.0304 * scale.disp.inc,
                                         !is.na(tax) ~ (total.income.0304 - tax) * scale.disp.inc,
                                         TRUE ~ NA_real_))
 
-summary(data.clean$disp.income.scaled)
-summary(data.clean$disp.income.avail)
+summary(data_clean$disp.income.scaled)
+summary(data_clean$disp.income.avail)
 
 ## Create equivalised variables
 
 # The ABS adjusts all negative disposable income to zero for its calculation of equivalised disposable income
 # Source: Explanatory notes, 2015-16 HES, http://www.abs.gov.au/AUSSTATS/abs@.nsf/Lookup/6530.0Explanatory%20Notes12015-16?OpenDocument
 
-data.clean<- data.clean %>%
+data_clean<- data_clean %>%
   mutate(net.wealth.equiv = net.wealth / hh.equiv.derived,
     disp.inc.equiv = disp.income.avail / hh.equiv.derived,
     disp.income.ABS = ifelse(disp.income.avail < 0, 0, disp.income.avail),
@@ -346,7 +291,7 @@ data.clean<- data.clean %>%
 #sum assets (wealth.type=="asset")
 #sum liabilities (wealth.type=="liability")
 
-wealth.check <- data.clean %>%
+wealth.check <- data_clean %>%
   filter(!is.na(net.wealth)) %>%
   group_by(hh.id.unique) %>%
   mutate(sum.assets = sum(house.value,
@@ -382,10 +327,10 @@ wealth.check <- data.clean %>%
                                car.loans,
                                na.rm = T),
          net.wealth.qc = sum.assets - sum.liabilities,
-         net.wealth.dif = net.wealth.qc - net.wealth,
+         net_wealth_dif = net.wealth.qc - net.wealth,
          net.wealth.percent.dif = net.wealth.qc/net.wealth*100)
 
-summary(wealth.check$net.wealth.dif)
+summary(wealth.check$net_wealth_dif)
 summary(wealth.check$net.wealth.percent.dif)
 
 wealth.check.nomatch<- wealth.check %>%
@@ -399,7 +344,7 @@ nrow(wealth.check.nomatch)/nrow(wealth.check)*100 #only 1.1% don't match (all in
 
 ### Export -----
 
-data.clean$X<- NULL
+data_clean$X<- NULL
 
-return(data.clean) }
+return(data_clean) }
 

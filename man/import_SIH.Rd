@@ -4,7 +4,7 @@
 \alias{import_SIH}
 \title{Import SIH data}
 \usage{
-import_SIH(data_directory = getwd())
+import_SIH(data_directory = getwd(), grattandata = FALSE)
 }
 \arguments{
 \item{data_directory}{A directory with all the required files to run this function. /data contains all the HES DTA files. /HESvariables contains two files: HESkeyvariablenames.csv which is a list of the variables you want in your dataset and filenames.csv contains the filenames of each DTA file in your data folder.}

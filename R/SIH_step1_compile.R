@@ -8,102 +8,86 @@
 #' @importFrom haven read_sas
 #' @import dplyr
 #' @import purrr
+#' @importFrom sjlabelled as_label
 
-import_SIH <- function(data_directory=getwd()) {
-    ### Read in data ----
+import_SIH <- function(data_directory=getwd(),grattandata=FALSE) {
+  ### Read in data ----
+  #  library(tidyverse)
 
-    #var.names<-read.csv(paste0(data_directory,"/HESvariables/HESkeyvariablenames.csv"), stringsAsFactors=FALSE)
-    #file.names<-read.csv(paste0(data_directory,"/HESvariables/filenames.csv"), stringsAsFactors=FALSE)
-
-var.names  <- read.csv(system.file("extdata", "SIHkeyvariablenames.csv", package = "readabsmicrodata", mustWork = TRUE), stringsAsFactors=FALSE)
-file.names <- read.csv(system.file("extdata", "SIHfilenames.csv",        package = "readabsmicrodata", mustWork = TRUE), stringsAsFactors=FALSE)
-
-
-# Years=2005
-# data_directory="/Users/jnolan1/Dropbox (Grattan Institute)/Housing affordability/Data and analysis/Financial_stress_long"
-# file.names = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/SIHfilenames.csv", stringsAsFactors=FALSE)
-# var.names = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/SIHkeyvariablenames.csv", stringsAsFactors=FALSE)
-# Yearchar <- as.character(Years)
-# Year <- as.numeric(Yearchar)
+  var_names  <- read.csv(system.file("extdata", "SIHkeyvariablenames.csv", package = "readabsmicrodata", mustWork = TRUE), stringsAsFactors=FALSE)
+  file_names <- read.csv(system.file("extdata", "SIHfilenames.csv",        package = "readabsmicrodata", mustWork = TRUE), stringsAsFactors=FALSE)
 
 
-
-years_HH <- c("1995","2000","2003","2005","2007","2009","2011","2013","2015")
-years_IU <- c("1986","1990")
+  # Years=2005
+  # data_directory="/Users/jnolan1/Dropbox (Grattan Institute)/Housing affordability/Data and analysis/Financial_stress_long"
+  # file_names = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/SIHfilenames.csv", stringsAsFactors=FALSE)
+  # var_names = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/SIHkeyvariablenames.csv", stringsAsFactors=FALSE)
+  # Yearchar <- as.character(Years)
+  # Year <- as.numeric(Yearchar)
 
 
 
+  ### HH ###
 
-### HH ###
+  sih_importer_hh <- function(year,...)  {
+    #year=2015
+    #  grattandata=TRUE
+    #  library(grattandata)
+    #  library(tidyverse)
+    #  library(rio)
+    #  var_names <- import("inst/extdata/SIHkeyvariablenames.csv")
+    Yearchar = as.character(year)
+    if(grattandata==TRUE) {
+      filename <- file_names %>% filter(Year==year) %>%
+        mutate(full_path=paste0(Filename)) %>%
+        pull(full_path)
 
-sih_importer_hh <- function(Years,...)  {
-    Yearchar <- as.character(Years)
-    Year <- as.numeric(Yearchar)
-    # Read in the data
-    SIH.raw <-  read_sas(paste0(data_directory,"/",file.names$Filename[file.names$Year==Year]))
+      formats <- file_names %>% filter(Year==year) %>%
+        mutate_if(is.character, list(~na_if(., ""))) %>%
+        pull(Formats)
+
+      if(is.na(formats)) {
+       formats <- NULL}
+
+      SIH_raw <- read_microdata(filename,catalog_file = formats )
+
+      if(!is.null(formats)) {
+        SIH_raw <- SIH_raw %>% as_label()}
+    }
 
     #change column names to a common one.
     Columname <- paste0("SIH", Yearchar)
-    Varnamesfiltered <- filter(var.names, eval(parse(text=Columname))!="")
+    Varnamesfiltered <- filter(var_names, eval(parse(text=Columname))!="")
 
     ##check if all the variable names are correct
-    ##test<-data.frame(key.vars, key.vars %in% names(SIH.raw))
+    ##test<-data.frame(key.vars, key.vars %in% names(SIH_raw))
 
-    key.names <- Varnamesfiltered$r.var.name
-    key.vars <- eval(parse(text=paste0("Varnamesfiltered$SIH",Yearchar)))
-    names(SIH.raw) <- toupper(names(SIH.raw))
-    SIH.raw <- SIH.raw[,key.vars]
-    colnames(SIH.raw) <- key.names
+    key.names <- Varnamesfiltered$r_var_name %>% trimws()
+    key.vars <- eval(parse(text=paste0("Varnamesfiltered$SIH",Yearchar)))%>% trimws()
+    names(SIH_raw) <- toupper(names(SIH_raw))
+    SIH_raw <- SIH_raw[,key.vars]
+    colnames(SIH_raw) <- key.names
 
-    SIH.raw <- SIH.raw %>% mutate(refyear = Year)
-
-    #inconsistent data types
-    SIH.raw$hh.id <- as.character(SIH.raw$hh.id)
-
-SIH.raw
-
-}
-
-hh<- map_df(years_HH,sih_importer_hh)
-
-
-
-### IU ###
-
-import_sih_iu<- function(Years,...) {
-
-    Yearchar <- as.character(Years)
-    Year <- as.numeric(Yearchar)
-
-    # Read in the data
-    SIH.raw <-  read_sas(paste0(data_directory,"/",file.names$Filename[file.names$Year==Year]))
-
-
-    #change column names to a common one.
-    Columname <- paste0("SIHIU", Yearchar)
-    Varnamesfiltered <- filter(var.names, eval(parse(text=Columname))!="")
-
-    ##check if all the variable names are correct
-    ##test<-data.frame(key.vars, key.vars %in% names(SIH.raw))
-
-    key.names <- Varnamesfiltered$r.var.name
-    key.vars <- eval(parse(text=paste0("Varnamesfiltered$SIHIU",Yearchar)))
-    names(SIH.raw) <- toupper(names(SIH.raw))
-    SIH.raw <- SIH.raw[,key.vars]
-    colnames(SIH.raw) <- key.names
-
-    SIH.raw <- SIH.raw %>% mutate(refyear = Year)
+    SIH_raw <- SIH_raw %>% mutate(refyear = year)
 
     #inconsistent data types
-    SIH.raw$hh.id <- as.character(SIH.raw$hh.id)
+    SIH_raw$hh_id <- as.character(SIH_raw$hh_id)
 
-SIH.raw
+    if ("persons_15_over" %in% names(SIH_raw)) {
+    SIH_raw$persons_15_over <- as.character(SIH_raw$persons_15_over) }
+    if ("persons_under_15" %in% names(SIH_raw)) {
+      SIH_raw$persons_under_15 <- as.character(SIH_raw$persons_under_15) }
+    SIH_raw
 
-}#end for loop
 
-print("yay, we mapped the first one")
-iu<- map_df(years_IU,import_sih_iu)
-print("yay, we mapped the second one")
-bind_rows(iu,hh)
+  }
+
+  years_HH <- file_names %>% filter(!(Year %in% c(1990,2000,1986))) %>%  pull(Year) %>% rev()
+
+    # file_names<- import("inst/extdata/SIHfilenames.csv")
+    # var_names<-read.csv("inst/extdata/SIHkeyvariablenames.csv", stringsAsFactors=FALSE)
+
+map_df(years_HH,sih_importer_hh)
+
 }
 

@@ -1,88 +1,99 @@
-r.var.name,inflate,Label,HES1988,HES1993,HES1998,HES2003,HES2009,HES2015
-hh.id,,,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID
+r_var_name,inflate,Label,HES1988,HES1993,HES1998,HES2003,HES2009,HES2015
+hh_id,,,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID
 hhsize,,Number of persons in hh/number of usual residents in hh,NRPSNSHH,NUR,NUR,PERSHBC,PERSHBC,PERSHBC
-persons.15.over,,Number of members aged 15 years and over in the household,,,DNPSN,NOMEMHBC,NOMEMHBC,NOMEMHBC
-age.desc,,Age of household reference person,AGHEADHH,HDAGE,HDAGE,AGERHBC,AGERHBC,AGERHEC
-weight.10000,,Same as `weight` however must be divided by 10000,WEIGHTHH,WTH,WT,,,
+persons_15_over,,Number of members aged 15 years and over in the household,,,DNPSN,NOMEMHBC,NOMEMHBC,NOMEMHBC
+age_desc,,Age of household reference person,AGHEADHH,HDAGE,HDAGE,AGERHBC,AGERHBC,AGERHEC
+weight_10000,,Same as `weight` however must be divided by 10000,WEIGHTHH,WTH,WT,,,
 weight,,Weight households,,,,HESHHWT,HESHHWT,HESHHWT
-hh.equiv,,Equivalising factor (modified OECD),,,,EQUIVH,EQUIVH,EQUIVH
-fam.comp,,Family composition,DCOMP,DCOMP,DCOMP,DCOMPH,DCOMPH,DCOMPH
-net.wealth,Yes,Net wealth,,,,,WEALTHH,WEALTHH
-disp.income,Yes,Current weekly HH disposable income,DINC,DINC,DINC,DISPCH,DISPSCH8,DISPSCH8
-tot.income,Yes,Total current weekly HH income from all sources (gross) ,TOTINCHH,ITINC,ITINC,INCTOTCH,INCTSCH8,INCTSCH8
-exp.housing,Yes,,,,,EXP01,EXP01,EXP01
-exp.fuel,Yes,,,,,EXP02,EXP02,EXP02
-exp.food,Yes,,,,,EXP03,EXP03,EXP03
-exp.alcohol,Yes,,,,,EXP04,EXP04,EXP04
-exp.tobacco,Yes,,,,,EXP05,EXP05,EXP05
-exp.clothing,Yes,,,,,EXP06,EXP06,EXP06
-exp.furnishings,Yes,,,,,EXP07,EXP07,EXP07
-exp.hhservices,Yes,,,,,EXP08,EXP08,EXP08
-exp.medical,Yes,,,,,EXP09,EXP09,EXP09
-exp.transport,Yes,,,,,EXP10,EXP10,EXP10
-exp.comms,Yes,,,,,,,EXP11
-exp.recreation,Yes,,,,,EXP11,EXP11,EXP12
-exp.education,Yes,,,,,,,EXP13
-exp.personal,Yes,,,,,EXP12,EXP12,EXP14
-exp.misc,Yes,,,,,EXP13,EXP13,EXP15
-exp.tax,Yes,,,,,EXP14,EXP14,EXP16
-exp.mortgage,Yes,,,,,EXP15,EXP15,EXP17
-exp.ochc,Yes,,,,,EXP16,EXP16,EXP18
-exp.super,Yes,,,,,EXP17,EXP17,EXP19
-exp.total.g.s,Yes,Total Goods And Services Expenditure,,,,EXTLCSER,EXTLCSER,EXTLCSER
-exp.total,Yes,Total Household Expenditure (Including Selected Other Payments),,,,EXPTL,EXPTL,EXPTL
-exp.housing.cents,,Weekly household expenditure on current housing costs,HHCOSTS,EXP01,EXP01,,,
-exp.fuel.cents,,Weekly household expenditure on fuel and power,HHPOWER,EXP02,EXP02,,,
-exp.food.cents,,Weekly household expenditure on food and non alcoholic beverages,HHBEV,EXP03,EXP03,,,
-exp.alcohol.cents,,Weekly household expenditure on alcoholic beverages,HHALCO,EXP04,EXP04,,,
-exp.tobacco.cents,,Weekly household expenditure on tobacco,HHTOBA,EXP05,EXP05,,,
-exp.clothing.cents,,Weekly household expenditure on clothing and footwear,HHFOOT,EXP06,EXP06,,,
-exp.furnishings.cents,,Weekly household expenditure on household furnishings and equipment,HHEQUI,EXP07,EXP07,,,
-exp.hhservices.cents,,Weekly household expenditure on household services and operation,HHSERV,EXP08,EXP08,,,
-exp.medical.cents,,Weekly household expenditure on medical care and health expenses,HHHEALTH,EXP09,EXP09,,,
-exp.transport.cents,,Weekly household expenditure on transport,HHTRANS,EXP10,EXP10,,,
-exp.recreation.cents,,Weekly household expenditure on recreation and entertainment,HHENTER,EXP11,EXP11,,,
-exp.personal.cents,,Weekly household expenditure on personal care,HHCARE,EXP12,EXP12,,,
-exp.misc.cents,,Weekly household expenditure on miscellaneous commodities and services,HHGOODS,EXP13,EXP13,,,
-exp.tax.cents,,Weekly household expenditure on income tax,HHTAX,EXP14,EXP14,,,
-exp.mortgage.cents,,Weekly household expenditure on mortgage payment principal (selected dwelling),HHMORT,EXP15,EXP15,,,
-exp.ochc.cents,,Weekly household expenditure on other capital housing costs,HHCAPHSG,EXP16,EXP16,,,
-exp.super.cents,,Weekly household expenditure on superannuation and life insurance,HHINSU,EXP17,EXP17,,,
-exp.total.g.s.cents,,Weekly total household commodity and service expenditure ,HHEXPTTL,EXPTL,EXTLCSER,,,
-exp.total.cents,,Total Household Expenditure (Including Selected Other Payments),,,EXPTL,,,
+hh_equiv,,Equivalising factor (modified OECD),,,,EQUIVH,EQUIVH,EQUIVH
+fam_comp,,Family composition,DCOMP,DCOMP,DCOMP,DCOMPH,DCOMPH,DCOMPH
+net_wealth,Yes,Net wealth,,,,,WEALTHH,WEALTHH
+disp-income_0304,,,DINC,DINC,DINC,DISPCH,,
+disp_income_0506,,,,,,,DISPSCH,DISPSCH
+disp_income_0708,Yes,Current weekly HH disposable income,,,,,DISPSCH8,DISPSCH8
+tot_income,Yes,Total current weekly HH income from all sources (gross) ,TOTINCHH,ITINC,ITINC,INCTOTCH,INCTSCH8,INCTSCH8
+exp_housing,Yes,,,,,EXP01,EXP01,EXP01
+exp_fuel,Yes,,,,,EXP02,EXP02,EXP02
+exp_food,Yes,,,,,EXP03,EXP03,EXP03
+exp_alcohol,Yes,,,,,EXP04,EXP04,EXP04
+exp_tobacco,Yes,,,,,EXP05,EXP05,EXP05
+exp_clothing,Yes,,,,,EXP06,EXP06,EXP06
+exp_furnishings,Yes,,,,,EXP07,EXP07,EXP07
+exp_hhservices,Yes,,,,,EXP08,EXP08,EXP08
+exp_medical,Yes,,,,,EXP09,EXP09,EXP09
+exp_transport,Yes,,,,,EXP10,EXP10,EXP10
+exp_comms,Yes,,,,,,,EXP11
+exp_recreation,Yes,,,,,EXP11,EXP11,EXP12
+exp_education,Yes,,,,,,,EXP13
+exp_personal,Yes,,,,,EXP12,EXP12,EXP14
+exp_misc,Yes,,,,,EXP13,EXP13,EXP15
+exp_tax,Yes,,,,,EXP14,EXP14,EXP16
+exp_mortgage,Yes,,,,,EXP15,EXP15,EXP17
+exp_ochc,Yes,,,,,EXP16,EXP16,EXP18
+exp_super,Yes,,,,,EXP17,EXP17,EXP19
+exp_total_g_s,Yes,Total Goods And Services Expenditure,,,,EXTLCSER,EXTLCSER,EXTLCSER
+exp_total,Yes,Total Household Expenditure (Including Selected Other Payments),,,,EXPTL,EXPTL,EXPTL
+exp_housing_cents,,Weekly household expenditure on current housing costs,HHCOSTS,EXP01,EXP01,,,
+exp_fuel_cents,,Weekly household expenditure on fuel and power,HHPOWER,EXP02,EXP02,,,
+exp_food_cents,,Weekly household expenditure on food and non alcoholic beverages,HHBEV,EXP03,EXP03,,,
+exp_alcohol_cents,,Weekly household expenditure on alcoholic beverages,HHALCO,EXP04,EXP04,,,
+exp_tobacco_cents,,Weekly household expenditure on tobacco,HHTOBA,EXP05,EXP05,,,
+exp_clothing_cents,,Weekly household expenditure on clothing and footwear,HHFOOT,EXP06,EXP06,,,
+exp_furnishings_cents,,Weekly household expenditure on household furnishings and equipment,HHEQUI,EXP07,EXP07,,,
+exp_hhservices_cents,,Weekly household expenditure on household services and operation,HHSERV,EXP08,EXP08,,,
+exp_medical_cents,,Weekly household expenditure on medical care and health expenses,HHHEALTH,EXP09,EXP09,,,
+exp_transport_cents,,Weekly household expenditure on transport,HHTRANS,EXP10,EXP10,,,
+exp_recreation_cents,,Weekly household expenditure on recreation and entertainment,HHENTER,EXP11,EXP11,,,
+exp_personal_cents,,Weekly household expenditure on personal care,HHCARE,EXP12,EXP12,,,
+exp_misc_cents,,Weekly household expenditure on miscellaneous commodities and services,HHGOODS,EXP13,EXP13,,,
+exp_tax_cents,,Weekly household expenditure on income tax,HHTAX,EXP14,EXP14,,,
+exp_mortgage_cents,,Weekly household expenditure on mortgage payment principal (selected dwelling),HHMORT,EXP15,EXP15,,,
+exp_ochc_cents,,Weekly household expenditure on other capital housing costs,HHCAPHSG,EXP16,EXP16,,,
+exp_super_cents,,Weekly household expenditure on superannuation and life insurance,HHINSU,EXP17,EXP17,,,
+exp_total_g_s_cents,,Weekly total household commodity and service expenditure ,HHEXPTTL,EXPTL,EXTLCSER,,,
+exp_total_cents,,Total Household Expenditure (Including Selected Other Payments),,,EXPTL,,,
 d1age,,Number of persons in hh less than 2,PSNSU2,D1AGE,,,,
 d2age,,Number of persons in hh between 2 and 4,PSNS4,D2AGE,,,,
 d3age,,Number of persons in hh between 5 and 12,PSNS12,D3AGE,,,,
 d4age,,Number of persons in hh between 13 and 14,PSNS14,D4AGE,,,,
-final.income,,Weekly household final income (FIS),FINC,FINC,FINC,FINC,FINC,
-total.taxes,,Weekly household total taxes (FIS),,,TTAX,TTAX,TTAX,
-total.taxes.cents,,Weekly household total taxes (FIS) (cents),TTAX,TTAX,,,,
-total.benefits,,Total weekly household social assistance benefits in cash or in kind,,,TBEN,TBEN,TBEN,TBEN
-total.benefits.cents,,Total weekly household social assistance benefits in cash or in kind (in cents),TBEN,TBEN,,,,
-total.dir.benefits,,Direct benefits - weekly household total social assistance benefits in cash,DBEN,DBEN,DBEN,DBEN,DBEN,DBEN
-total.ind.benefits,,Indirect benefits - weekly household total social transfers in kind,,,IBEN,IBEN,IBEN,IBEN
-total.ind.benefits.cents,,Indirect benefits - weekly household total social transfers in kind (in cents),IBEN,IBEN,,,,
-ind.health,,Indirect health benefits - weekly household total social transfers in kind for health,,,,UHLTOT,UHLTOT,UHLTOT
-ind.health.cents,,Indirect health benefits - weekly household total social transfers in kind for health (in cents),UHLTOT,UHLTOT,UHLTOT,,,
-ind.edu,,Indirect education benefits - weekly household total social transfers in kind for education,,,,EDUB,EDUB,EDUB
-ind.edu.cents,,Indirect education benefits - weekly household total social transfers in kind for education (in cents),EDUB,EDUB,EDUB,,,
-ind.welfare,,Indirect welfare - weekly household social transfers in kind for welfare (FIS),,TOTWELFB,,TOTWELFB,TOTWELFB,TOTWELFB
-ind.welfare.cents,,Indirect welfare - weekly household social transfers in kind for welfare (FIS) (in cents),,,TOTWELFB,,,
-ind.childcare.assist,,Indirect childcare support - weekly household social transfers in kind for child care assistance (FIS),,,,WKLYCCB,WKLYCCA,WKLYCCAH
-childcare.benefit,,Weekly HH Child Care Benefit,,,,,WKLYCCBF,WKLYCCBH
-childcare.rebate,,Weekly HH Child Care Rebate,,,,,WKLYCCRF,WKLYCCRH
-fin.stress.comm.org,,Assistance sought from welfare/community organisations due to shortage of money,,,CFWELFAR ,CFWELFAR,CFWELFAR,CFWELFAR
-fin.stress.pawned,,Pawned or sold something due to shortage of money,,,CFPAWNSO,CFPAWNSO,CFPAWNSO,CFPAWNSO
-fin.stress.family.help,,Sought financial help from friends/family due to a shortage of money,,,CFFAMILY,CFFAMILY,CFFAMILY,CFFAMILY
-fin.stress.heating,,Unable to heat home due to shortage of money,,,CFNOHEAT,CFNOHEAT,CFNOHEAT,CFNOHEAT
-fin.stress.skipped.meals,,Went without meals due to shortage of money,,,CFNOMEAL,CFNOMEAL,CFNOMEAL,CFNOMEAL
-fin.stress.late.bills,,Whether could not pay gas/electricity/telephone bill on time due to shortage of money,,,CFELECTR,CFELECTR,CFELECTR,CFELECTR
-fin.stress.late.rego,,Whether could not pay registration/insurance on time due to shortage of money,,,CFREGOIN,CFREGOIN,CFREGOIN,CFREGOIN
-fin.stress.emergency.money,,Ability of household to raise emergency money,,,EMGMONEY,EMGMONEY,EMGMONEY,EMGMONEY
-hh.std.living,,,,,,,STDLIVE,STDLIVE
-hh.fin.missing.out,,,,,,,,CFSTSSMO
-hh.fin.stress,,,,,,,,CFSTRSS
-hh.fin.stress.missing.out,,,,,,,,TCFSTRSS
-Rent.assistance.amount,Yes,,,,,,,CWKCRAH
+final_income,Yes,Weekly household final income (FIS),FINC,FINC,FINC,FINC,FINC,
+total_taxes,Yes,Weekly household total taxes (FIS),,,TTAX,TTAX,TTAX,
+total_taxes_cents,,Weekly household total taxes (FIS) (cents),TTAX,TTAX,,,,
+total_benefits,Yes,Total weekly household social assistance benefits in cash or in kind,,,TBEN,TBEN,TBEN,TBEN
+total_benefits_cents,,Total weekly household social assistance benefits in cash or in kind (in cents),TBEN,TBEN,,,,
+total_dir_benefits,Yes,Direct benefits - weekly household total social assistance benefits in cash,DBEN,DBEN,DBEN,DBEN,DBEN,DBEN
+total_ind_benefits,Yes,Indirect benefits - weekly household total social transfers in kind,,,IBEN,IBEN,IBEN,IBEN
+total_ind_benefits_cents,,Indirect benefits - weekly household total social transfers in kind (in cents),IBEN,IBEN,,,,
+ind_health,Yes,Indirect health benefits - weekly household total social transfers in kind for health,,,,UHLTOT,UHLTOT,UHLTOT
+ind_health_cents,,Indirect health benefits - weekly household total social transfers in kind for health (in cents),UHLTOT,UHLTOT,UHLTOT,,,
+ind_edu,Yes,Indirect education benefits - weekly household total social transfers in kind for education,,,,EDUB,EDUB,EDUB
+ind_edu_cents,,Indirect education benefits - weekly household total social transfers in kind for education (in cents),EDUB,EDUB,EDUB,,,
+ind_welfare,Yes,Indirect welfare - weekly household social transfers in kind for welfare (FIS),,TOTWELFB,,TOTWELFB,TOTWELFB,TOTWELFB
+ind_welfare_cents,,Indirect welfare - weekly household social transfers in kind for welfare (FIS) (in cents),,,TOTWELFB,,,
+ind_childcare_assist,Yes,Indirect childcare support - weekly household social transfers in kind for child care assistance (FIS),,,,WKLYCCB,WKLYCCA,WKLYCCAH
+childcare_benefit,,Weekly HH Child Care Benefit,,,,,WKLYCCBF,WKLYCCBH
+childcare_rebate,,Weekly HH Child Care Rebate,,,,,WKLYCCRF,WKLYCCRH
+fin_stress_comm_org,,Assistance sought from welfare/community organisations due to shortage of money,,,CFWELFAR ,CFWELFAR,CFWELFAR,CFWELFAR
+fin_stress_pawned,,Pawned or sold something due to shortage of money,,,CFPAWNSO,CFPAWNSO,CFPAWNSO,CFPAWNSO
+fin_stress_family_help,,Sought financial help from friends/family due to a shortage of money,,,CFFAMILY,CFFAMILY,CFFAMILY,CFFAMILY
+fin_stress_heating,,Unable to heat home due to shortage of money,,,CFNOHEAT,CFNOHEAT,CFNOHEAT,CFNOHEAT
+fin_stress_skipped_meals,,Went without meals due to shortage of money,,,CFNOMEAL,CFNOMEAL,CFNOMEAL,CFNOMEAL
+fin_stress_late_bills,,Whether could not pay gas/electricity/telephone bill on time due to shortage of money,,,CFELECTR,CFELECTR,CFELECTR,CFELECTR
+fin_stress_late_rego,,Whether could not pay registration/insurance on time due to shortage of money,,,CFREGOIN,CFREGOIN,CFREGOIN,CFREGOIN
+fin_stress_emergency_money,,Ability of household to raise emergency money,,,EMGMONEY,EMGMONEY,EMGMONEY,EMGMONEY
+hh_std_living,,,,,,,STDLIVE,STDLIVE
+hh_fin_missing_out,,,,,,,,CFSTSSMO
+hh_fin_stress,,,,,,,,CFSTRSS
+hh_fin_stress_missing_out,,,,,,,,TCFSTRSS
+rent_assistance_amount,Yes,,,,,,,CWKCRAH
 tenure,,,,DTENU,DTENU,TENURECF,TENURECF,TENURECF
-pension.source,,,,,,,PSINC,PSINC
+pension_source,,,,,,,PSINC,PSINC
+imputed_rent_net,Yes,,,,,,NETIR,NETIR
+imputed_rent_gross,Yes,,,,,,GROSSIR,GROSSIR
+rent,Yes,,,,,,WKRENTCH,WKRENTCH
+mortgage_renovations,Yes,,,,,,TRPAY2CH,TRPAY2CH
+motrgage_house,,,,,,,TRPAY1CH,TRPAY1CH
+landlord_type,,,,,,,LDLRDHCF,LDLRDHCF
+labour_force_status,,,,,,,LFSRH,LFSRH
+disp_income_prev_year,,,,,,,,DISPPH8
+kids_dependent,,,,,,,,DPKIDHBC

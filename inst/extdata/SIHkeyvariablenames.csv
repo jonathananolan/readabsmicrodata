@@ -1,78 +1,73 @@
-r.var.name,Label,asset.grouping,inflate,wealth.type,SIHIU1986,SIHIU1990,SIH1995,SIH2000,SIH2003,SIH2005,SIH2007,SIH2009,SIH2011,SIH2013,SIH2015
-hh.id,,,,,UUU0001,RANDOMID,ABSHID,HHIDH,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID
-income.unit.type,,,,,UUU0005,IUTYPE,,,,,,,,,
-weight,Weight (nb: weight for a household is the same as for all income units within the household),,,,,,,,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT
-weight.10000,Weight (nb: weight for a household is the same as for all income units within the household) - divide this variable by 10000 to match weights in later years,,,,UUU0201,WTUNITNU,WTHH,WTHH,,,,,,,
-hh.equiv,Equivalising factor (modified OECD),,,,,,,,EQUIVH,EQUIVH,EQUIVH,EQUIVH,EQUIVH,EQUIVH,EQUIVH
-age,Age of household reference person (continuous),,,,,,,,,,,,,,AGERHEC
-age.code.1,Age of household reference person coded from 1-15 (1= 15 years; 15=75+),,,,UUU0024,AGEHU,,,,,,,,,
-age.code.2,Age of household reference person coded from 1-29 (1= 15 years; 29=75+),,,,,,AGERH,AGERH,,,,,,,
-age.code.3,Age of household reference person coded from 1-29 (1= 15 years; 30=80+),,,,,,,,AGERHBC,AGERHBC,AGERHBC,AGERHBC,AGERHBC,AGERHBC,
-persons,Total number of persons,,,,UUU0006,,,,PERSHBC,PERSHBC,PERSHBC,PERSHBC,PERSHBC,PERSHBC,PERSHBC
-persons.15.over,Number of members aged 15 years and over in the household,,,,,,NUMMEMH,NUMMEMH,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC
-persons.under.15,Number of dependent children aged under 15 years in the household,,,,UUU0012,AGEOT14U,NUMYDEPH,NUMYDEPH,NUMU15BC,NUMU15BC,,,,,
-persons.15.64,number of persons aged 15-64,,,,UUU0013,AGE1564U,,,,,,,,,
-persons.65.plus,number of persons age 65+,,,,UUU0014,AGE6599U,,,,,,,,,
-family.composition,,,,,,,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH
-total.income.0304,Total current weekly income from all sources (03-04 basis),,Yes,,UUU0196,INCTOTCU,INCTOTCH,INCTOTCH,INCTOTCH,INCTOTCH,INCTOTCH,,,,
-total.income.0506,Total current weekly income from all sources (05-06 basis),,Yes,,,,,,,INCTSCH,INCTSCH,INCTSCH,INCTSCH,INCTSCH,INCTSCH
-total.income.0708,Total current weekly income from all sources (07-08 basis),,Yes,,,,,,,,INCTSCH8,INCTSCH8,INCTSCH8,INCTSCH8,INCTSCH8
-tax.annual,Total tax paid yearly (imputed) ,,,,UUU0194,,,,,,,,,,
-tax.weekly,Total tax paid weekly (imputed) ,,Yes,,,TAXCU,,,,,,,,,
-disposable.income.0304,Current weekly household disposable income (03-04 basis),,Yes,,,,DISPCH,DISPCH,DISPCH,DISPCH,DISPCH,,,,
-disposable.income.0506,Current weekly household disposable income (05-06 basis),,`,,,,,,,DISPSCH,DISPSCH,DISPSCH,DISPSCH,DISPSCH,DISPSCH
-disposable.income.0708,Current weekly household disposable income (07-08 basis),,Yes,,,,,,,,DISPSCH8,DISPSCH8,DISPSCH8,DISPSCH8,DISPSCH8
-net.wealth,Net wealth of household,,Yes,,,,,,WEALTHH,WEALTHH,,WEALTHH,WEALTHH,WEALTHH,WEALTHH
-credit.card.debt,Amount of credit card debt - household level,other.financial.assets.grouped.debt,Yes,liability,,,,,LIACCCH,LIACCCH,,LIACCCH,LIACCCH,LIACCCH,LIACCCH
-help.debt,Amount of HECS/HELP liability,other.financial.assets.grouped.debt,Yes,liability,,,,,LIAHECCH,LIAHECCH,,LIAHECCH,LIAHECCH,LIAHECCH,LIAHECCH
-investment.debt,Principal outstanding on investment loans (excl business and rental property loans),other.financial.assets.grouped.debt,Yes,liability,,,,,LIAINVCH,LIAINVCH,,LIAINVCH,LIAINVCH,LIAINVCH,LIAINVCH
-oth.house.debt,Principal outstanding on loans for other property (excl business and investment loans),other.property.grouped.debt,Yes,liability,,,,,LIAOPCH,LIAOPCH,,LIAOPCH,LIAOPCH,LIAOPCH,LIAOPCH
-loans.debt,Principal outstanding on loans for other purposes (excl business and investment loans),other.financial.assets.grouped.debt,Yes,liability,,,,,LIAOTCH,LIAOTCH,,LIAOTCH,LIAOTCH,LIAOTCH,LIAOTCH
-oth.all.house.debt,Principal outstanding on rental property loans,other.property.grouped.debt,Yes,liability,,,,,LIARPCH,LIARPCH,,LIARPCH,LIARPCH,LIARPCH,LIARPCH
-house.debt,Principal outstanding on loans for selected dwelling,home.grouped.debt,Yes,liability,,,,,LIASDCH,LIASDCH,,LIASDCH,LIASDCH,LIASDCH,LIASDCH
-student.debt,Amount of Student Financial Supplement liability,other.financial.assets.grouped.debt,Yes,liability,,,,,LIASFSCH,LIASFSCH,,LIASFSCH,LIASFSCH,LIASFSCH,LIASFSCH
-car.loans,Principal outstanding on loans for vehicle purchases (excl business and investment loans),all.other.wealth.grouped.debt,Yes,liability,,,,,LIAVECH,LIAVECH,,LIAVECH,LIAVECH,LIAVECH,LIAVECH
-house.value,Estimated sale price of dwelling - HH,home.grouped.value,Yes,asset,,,,,HVALUECH,HVALUECH,,HVALUECH,HVALUECH,HVALUECH,HVALUECH
-contents.value,Value of contents of selected dwelling,all.other.wealth.grouped.value,Yes,asset,,,,,VCONTCH,VCONTCH,,VCONTCH,VCONTCH,VCONTCH,VCONTCH
-bonds.value,Value of debentures and bonds - household level,other.financial.assets.grouped.value,Yes,asset,,,,,VDEBCH,VDEBCH,,VDEBCH,VDEBCH,VDEBCH,VDEBCH
-bank.deposit.value,Value of accounts held with financial institutions (excl offset accounts in 2015) - household level,other.financial.assets.grouped.value,Yes,asset,,,,,VFINCH,VFINCH,,VFINCH,VFINCH,VFINCH,VFINCH
-business.value,Value of own incorporated business (net of liabilities) - household level,other.financial.assets.grouped.value,Yes,asset,,,,,VIBUSCH,VIBUSCH,,VIBUSCH,VIBUSCH,VIBUSCH,VIBUSCH
-investments.value,Value of other financial investments - household level,other.financial.assets.grouped.value,Yes,asset,,,,,VINVOTCH,VINVOTCH,,VINVOTCH,VINVOTCH,VINVOTCH,VINVOTCH
-non.res.prop,Value of non-residential property,other.property.grouped.value,Yes,asset,,,,,VNRPRCH,VNRPRCH,,VNRPRCH,VNRPRCH,VNRPRCH,VNRPRCH
-offset.value,Value of offset accounts - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,,,,VOFTCH,VOFTCH,VOFTCH
-other.value,Value of assets nec,all.other.wealth.grouped.value,Yes,asset,,,,,VOTASSCH,VOTASSCH,,VOTASSCH,VOTASSCH,VOTASSCH,VOTASSCH
-loans.value,Value of loans to persons not in the same household - household level,other.financial.assets.grouped.value,Yes,asset,,,,,VPLNCH,VPLNCH,,VPLNCH,VPLNCH,VPLNCH,VPLNCH
-trusts.all,Value of all trusts,other.financial.assets.grouped.value,Yes,asset,,,,,VTRTCH,VTRTCH,,,,,
-private.trust.value,Value of private trust - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,,,VPRTCH,VPRTCH,VPRTCH,VPRTCH
-public.trust.value,Value of public unit trusts - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,,,VPUTCH,VPUTCH,VPUTCH,VPUTCH
-oth.house.value,Value of residential property excl selected dwelling,other.property.grouped.value,Yes,asset,,,,,VRPRCH,VRPRCH,,VRPRCH,VRPRCH,VRPRCH,VRPRCH
-shares.value,Value of shares - household level,other.financial.assets.grouped.value,Yes,asset,,,,,VSHARCH,VSHARCH,,VSHARCH,VSHARCH,VSHARCH,VSHARCH
-partnership.value,Value of silent partnerships - household level (this was previously classified as investment income but now is unincorporated business,other.financial.assets.grouped.value,Yes,asset,,,,,,,,VSIPCH,VSIPCH,VSIPCH,VSIPCH
-super.gov.value,Balance of accounts with government superannuation funds - household level,super.grouped.value,Yes,asset,,,,,VSUPGCH,VSUPGCH,,VSUPGCH,VSUPGCH,VSUPGCH,VSUPGCH
-super.non.gov.value,Balance of accounts with non-government superannuation funds - household level,super.grouped.value,Yes,asset,,,,,VSUPNCH,VSUPNCH,,VSUPNCH,VSUPNCH,VSUPNCH,VSUPNCH
-business.unincorp.value,Value of own unincorporated business (net of liabilities) - household level,other.financial.assets.grouped.value,Yes,asset,,,,,VUBUSCH,VUBUSCH,,VUBUSCH,VUBUSCH,VUBUSCH,VUBUSCH
-car.value,Value of vehicles,all.other.wealth.grouped.value,Yes,asset,,,,,VVEHICH,VVEHICH,,VVEHICH,VVEHICH,VVEHICH,VVEHICH
-kids.value,Value of children's assets,other.financial.assets.grouped.value,Yes,asset,,,,,VCHASSCH,VCHASSCH,,VCHASSCH,,,
-imputed.rent,Weekly gross imputed rent - IR,,Yes,,,,,,,,,,GROSSIR,GROSSIR,GROSSIR
-net.imputed.rent,Weekly HH income from net imputed rent - IR,,Yes,,,,,,,,,,NETIR,NETIR,NETIR
-income.employee.0304,Current weekly HH employee income (2003-04 basis),,,,,,,,IWSUCH,IWSUCH,IWSUCH,,,,
-income.employee.0506,Current weekly HH employee income (2005-06 basis),,,,,,,,,IWSSUCH,IWSSUCH,IWSSUCH,,,
-income.employee.0708,Current weekly HH employee income (2007-08 basis),,,,,,,,,,IWSUCH8,IWSUCH8,IWSUCH8,IWSUCH8,IWSUCH8
-income.uninc.business,Current weekly HH income from own unincorporated business,,,,,,,,IOBTCH,IOBTCH,IOBTCH,IOBTCH,IOBTCH,IOBTCH,IOBTCH
-income.investments.0506,Current weekly HH income from investments (previous basis),,,,,,,,INVESTCH,INVESTCH,INVESTCH,,,,
-income.investments.0708,Current weekly HH income from investments (2007-08 basis),,,,,,,,,,INVESCH8,INVESCH8,INVESCH8,INVESCH8,INVESCH8
-income.pensions.allowances.0506,Current weekly HH income from government pensions and allowances (previous basis),,,,,,,,ITGCBCH,ITGCBCH,ITGCBCH6,ITGCBCH6,,,
-income.pensions.allowances.0708,Current weekly HH income from government pensions and allowances (2007-08 basis),,,,,,,,,,ITGCBCH8,ITGCBCH8,ITGCBCH8,ITGCBCH8,ITGCBCH8
-income.super,Current weekly HH income from superannuation/annuity/allocated pension,,,,,,,,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH
-income.other.sources,Current weekly HH income from other regular sources (excluding superannuation),,,,,,,,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH
-income.other.sources.incl.WC,Current weekly HH income from other regular sources (excluding superannuation) (incl WC lump sums),,,,,,,,,,OTHSRCH8,OTHSRCH8,OTHSRCH8,OTHSRCH8,OTHSRCH8
-pension.source,,,,,,,,,,,,,,PSINC,PSINC
-fin.stress.comm.org,,,,,,,,,,,,CFWELFAR ,,,CFWELFAR
-fin.stress.pawned,,,,,,,,,,,,CFPAWNSO,,,CFPAWNSO
-fin.stress.family.help,,,,,,,,,,,,CFFAMILY,,,CFFAMILY
-fin.stress.heating,,,,,,,,,,,,CFNOHEAT,,,CFNOHEAT
-fin.stress.skipped.meals,,,,,,,,,,,,CFNOMEAL,,,CFNOMEAL
-fin.stress.late.bills,,,,,,,,,,,,CFELECTR,,,CFELECTR
-fin.stress.late.rego,,,,,,,,,,,,CFREGOIN,,,CFREGOIN
-fin.stress.emergency.money,,,,,,,,,,,,EMGMONEY,,,EMGMONEY
-tenure,,,,,,,,,,TENURECF,TENURECF,TENURECF,TENURECF,TENURECF,TENURECF
+r_var_name,Label,asset.grouping,inflate,wealth.type,SIH1986,SIH1990,SIH1994,SIH1996,SIH2000,SIH2003,SIH2005,SIH2007,SIH2009,SIH2011,SIH2013,SIH2015,SIH2017
+hh_id,,,,,UUU0001,RANDOMID,ABSHID,ABSHID,HHIDH,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID,ABSHID
+income_unit_type,,,,,UUU0005,IUTYPE,,,,,,,,,,,
+weight,Weight (nb: weight for a household is the same as for all income units within the household),,,,,,,,,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT,SIHHHWT
+weight_10000,Weight (nb: weight for a household is the same as for all income units within the household) - divide this variable by 10000 to match weights in later years,,,,UUU0201,WTUNITNU,WTHH,WTHH,WTHH,,,,,,,,
+hh_equiv,Equivalising factor (modified OECD),,,,,,,,,EQUIVH,EQUIVH,EQUIVH,EQUIVH,EQUIVH,EQUIVH,EQUIVH,EQUIVH
+age,Age of household reference person (continuous),,,,,,,,,,,,,,,AGERHEC,AGERHEC
+age_code_1,Age of household reference person coded from 1-15 (1= 15 years; 15=75+),,,,UUU0024,AGEHU,,,,,,,,,,,
+age_code_2,Age of household reference person coded from 1-29 (1= 15 years; 29=75+),,,,,,AGERH,AGERH,AGERH,,,,,,,,
+age_code_3,Age of household reference person coded from 1-29 (1= 15 years; 30=80+),,,,,,,,,AGERHBC,AGERHBC,AGERHBC,AGERHBC,AGERHBC,AGERHBC,,
+persons,Total number of persons,,,,UUU0006,,,,,PERSHBC,PERSHBC,PERSHBC,PERSHBC,PERSHBC,PERSHBC,PERSHBC,PERSHBC
+persons_15_over,Number of members aged 15 years and over in the household,,,,,,NUMMEMH,NUMMEMH,NUMMEMH,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC,NOMEMHBC
+persons_under_15,Number of dependent children aged under 15 years in the household,,,,UUU0012,AGEOT14U,NUMYDEPH,NUMYDEPH,NUMYDEPH,NUMU15BC,NUMU15BC,,,,,,
+persons_15_64,number of persons aged 15-64,,,,UUU0013,AGE1564U,,,,,,,,,,,
+persons_65_plus,number of persons age 65+,,,,UUU0014,AGE6599U,,,,,,,,,,,
+family_composition,,,,,,,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH,DCOMPH
+total_income_0304,Total current weekly income from all sources (03-04 basis),,Yes,,UUU0196,INCTOTCU,INCTOTCH,INCTOTCH,INCTOTCH,INCTOTCH,INCTOTCH,INCTOTCH,,,,,
+total_income_0506,Total current weekly income from all sources (05-06 basis),,Yes,,,,,,,,INCTSCH,INCTSCH,INCTSCH,INCTSCH,INCTSCH,INCTSCH,INCTSCH
+total_income_0708,Total current weekly income from all sources (07-08 basis),,Yes,,,,,,,,,INCTSCH8,INCTSCH8,INCTSCH8,INCTSCH8,INCTSCH8,INCTSCH8
+tax_annual,Total tax paid yearly (imputed) ,,Yes,,UUU0194,,,,,,,,,,,,
+tax_weekly,Total tax paid weekly (imputed) ,,Yes,,,TAXCU,,,,,,,,,,,
+disposable_income_0304,Current weekly household disposable income (03-04 basis),,Yes,,,,DISPCH,DISPCH,DISPCH,DISPCH,DISPCH,DISPCH,,,,,
+disposable_income_0506,Current weekly household disposable income (05-06 basis),,Yes,,,,,,,,DISPSCH,DISPSCH,DISPSCH,DISPSCH,DISPSCH,DISPSCH,DISPSCH
+disposable_income_0708,Current weekly household disposable income (07-08 basis),,Yes,,,,,,,,,DISPSCH8,DISPSCH8,DISPSCH8,DISPSCH8,DISPSCH8,DISPSCH8
+net_wealth,Net wealth of household,,Yes,,,,,,,WEALTHH,WEALTHH,,WEALTHH,WEALTHH,WEALTHH,WEALTHH,WEALTHH
+credit_card_debt,Amount of credit card debt - household level,other.financial.assets.grouped.debt,Yes,liability,,,,,,LIACCCH,LIACCCH,,LIACCCH,LIACCCH,LIACCCH,LIACCCH,LIACCCH
+help_debt,Amount of HECS/HELP liability,other.financial.assets.grouped.debt,Yes,liability,,,,,,LIAHECCH,LIAHECCH,,LIAHECCH,LIAHECCH,LIAHECCH,LIAHECCH,LIAHECCH
+investment_debt,Principal outstanding on investment loans (excl business and rental property loans),other.financial.assets.grouped.debt,Yes,liability,,,,,,LIAINVCH,LIAINVCH,,LIAINVCH,LIAINVCH,LIAINVCH,LIAINVCH,LIAINVCH
+oth_house_debt,Principal outstanding on loans for other property (excl business and investment loans),other.property.grouped.debt,Yes,liability,,,,,,LIAOPCH,LIAOPCH,,LIAOPCH,LIAOPCH,LIAOPCH,LIAOPCH,LIAOPCH
+loans_debt,Principal outstanding on loans for other purposes (excl business and investment loans),other.financial.assets.grouped.debt,Yes,liability,,,,,,LIAOTCH,LIAOTCH,,LIAOTCH,LIAOTCH,LIAOTCH,LIAOTCH,LIAOTCH
+oth_all_house_debt,Principal outstanding on rental property loans,other.property.grouped.debt,Yes,liability,,,,,,LIARPCH,LIARPCH,,LIARPCH,LIARPCH,LIARPCH,LIARPCH,LIARPCH
+house_debt,Principal outstanding on loans for selected dwelling,home.grouped.debt,Yes,liability,,,,,,LIASDCH,LIASDCH,,LIASDCH,LIASDCH,LIASDCH,LIASDCH,LIASDCH
+student_debt,Amount of Student Financial Supplement liability,other.financial.assets.grouped.debt,Yes,liability,,,,,,LIASFSCH,LIASFSCH,,LIASFSCH,LIASFSCH,LIASFSCH,LIASFSCH,LIASFSCH
+car_loans,Principal outstanding on loans for vehicle purchases (excl business and investment loans),all.other.wealth.grouped.debt,Yes,liability,,,,,,LIAVECH,LIAVECH,,LIAVECH,LIAVECH,LIAVECH,LIAVECH,LIAVECH
+house_value,Estimated sale price of dwelling - HH,home.grouped.value,Yes,asset,,,,,,HVALUECH,HVALUECH,,HVALUECH,HVALUECH,HVALUECH,HVALUECH,HVALUECH
+contents_value,Value of contents of selected dwelling,all.other.wealth.grouped.value,Yes,asset,,,,,,VCONTCH,VCONTCH,,VCONTCH,VCONTCH,VCONTCH,VCONTCH,VCONTCH
+bonds_value,Value of debentures and bonds - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,VDEBCH,VDEBCH,,VDEBCH,VDEBCH,VDEBCH,VDEBCH,VDEBCH
+bank_deposit_value,Value of accounts held with financial institutions (excl offset accounts in 2015) - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,VFINCH,VFINCH,,VFINCH,VFINCH,VFINCH,VFINCH,VFINCH
+business_value,Value of own incorporated business (net of liabilities) - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,VIBUSCH,VIBUSCH,,VIBUSCH,VIBUSCH,VIBUSCH,VIBUSCH,VIBUSCH
+investments_value,Value of other financial investments - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,VINVOTCH,VINVOTCH,,VINVOTCH,VINVOTCH,VINVOTCH,VINVOTCH,VINVOTCH
+non_res_prop,Value of non-residential property,other.property.grouped.value,Yes,asset,,,,,,VNRPRCH,VNRPRCH,,VNRPRCH,VNRPRCH,VNRPRCH,VNRPRCH,VNRPRCH
+offset_value,Value of offset accounts - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,,,,,VOFTCH,VOFTCH,VOFTCH,VOFTCH
+other_value,Value of assets nec,all.other.wealth.grouped.value,Yes,asset,,,,,,VOTASSCH,VOTASSCH,,VOTASSCH,VOTASSCH,VOTASSCH,VOTASSCH,VOTASSCH
+loans_value,Value of loans to persons not in the same household - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,VPLNCH,VPLNCH,,VPLNCH,VPLNCH,VPLNCH,VPLNCH,VPLNCH
+trusts_all,Value of all trusts,other.financial.assets.grouped.value,Yes,asset,,,,,,VTRTCH,VTRTCH,,,,,,
+private_trust_value,Value of private trust - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,,,,VPRTCH,VPRTCH,VPRTCH,VPRTCH,VPRTCH
+public_trust_value,Value of public unit trusts - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,,,,VPUTCH,VPUTCH,VPUTCH,VPUTCH,VPUTCH
+oth_house_value,Value of residential property excl selected dwelling,other.property.grouped.value,Yes,asset,,,,,,VRPRCH,VRPRCH,,VRPRCH,VRPRCH,VRPRCH,VRPRCH,VRPRCH
+shares_value,Value of shares - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,VSHARCH,VSHARCH,,VSHARCH,VSHARCH,VSHARCH,VSHARCH,VSHARCH
+partnership_value,Value of silent partnerships - household level (this was previously classified as investment income but now is unincorporated business,other.financial.assets.grouped.value,Yes,asset,,,,,,,,,VSIPCH,VSIPCH,VSIPCH,VSIPCH,VSIPCH
+super_gov_value,Balance of accounts with government superannuation funds - household level,super.grouped.value,Yes,asset,,,,,,VSUPGCH,VSUPGCH,,VSUPGCH,VSUPGCH,VSUPGCH,VSUPGCH,
+super_non_gov_value,Balance of accounts with non-government superannuation funds - household level,super.grouped.value,Yes,asset,,,,,,VSUPNCH,VSUPNCH,,VSUPNCH,VSUPNCH,VSUPNCH,VSUPNCH,
+business_unincorp_value,Value of own unincorporated business (net of liabilities) - household level,other.financial.assets.grouped.value,Yes,asset,,,,,,VUBUSCH,VUBUSCH,,VUBUSCH,VUBUSCH,VUBUSCH,VUBUSCH,VUBUSCH
+car_value,Value of vehicles,all.other.wealth.grouped.value,Yes,asset,,,,,,VVEHICH,VVEHICH,,VVEHICH,VVEHICH,VVEHICH,VVEHICH,VVEHICH
+kids_value,Value of children's assets,other.financial.assets.grouped.value,Yes,asset,,,,,,VCHASSCH,VCHASSCH,,VCHASSCH,,,,
+imputed_rent,Weekly gross imputed rent - IR,,Yes,,,,,,,,,,,GROSSIR,GROSSIR,GROSSIR,GROSSIR
+net_imputed_rent,Weekly HH income from net imputed rent - IR,,Yes,,,,,,,,,,,NETIR,NETIR,NETIR,NETIR
+income_employee_0304,Current weekly HH employee income (2003-04 basis),,Yes,,,,,,,IWSUCH,IWSUCH,IWSUCH,,,,,
+income_employee_0506,Current weekly HH employee income (2005-06 basis),,Yes,,,,,,,,IWSSUCH,IWSSUCH,IWSSUCH,,,,
+income_employee_0708,Current weekly HH employee income (2007-08 basis),,Yes,,,,,,,,,IWSUCH8,IWSUCH8,IWSUCH8,IWSUCH8,IWSUCH8,IWSUCH8
+income_uninc_business,Current weekly HH income from own unincorporated business,,Yes,,,,,,,IOBTCH,IOBTCH,IOBTCH,IOBTCH,IOBTCH,IOBTCH,IOBTCH,IOBTCH
+income_investments_0506,Current weekly HH income from investments (previous basis),,Yes,,,,,,,INVESTCH,INVESTCH,INVESTCH,,,,,
+income_investments_0708,Current weekly HH income from investments (2007-08 basis),,Yes,,,,,,,,,INVESCH8,INVESCH8,INVESCH8,INVESCH8,INVESCH8,INVESCH8
+income_pensions_allowances_0506,Current weekly HH income from government pensions and allowances (previous basis),,Yes,,,,,,,ITGCBCH,ITGCBCH,ITGCBCH6,ITGCBCH6,,,,
+income_pensions_allowances_0708,Current weekly HH income from government pensions and allowances (2007-08 basis),,Yes,,,,,,,,,ITGCBCH8,ITGCBCH8,ITGCBCH8,ITGCBCH8,ITGCBCH8,ITGCBCH8
+income_super,Current weekly HH income from superannuation/annuity/allocated pension,,Yes,,,,,,,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH,ISUPERCH
+income_other_sources,Current weekly HH income from other regular sources (excluding superannuation),,Yes,,,,,,,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH,OTHSRCH
+income_other_sources_incl_WC,Current weekly HH income from other regular sources (excluding superannuation) (incl WC lump sums),,Yes,,,,,,,,,OTHSRCH8,OTHSRCH8,OTHSRCH8,OTHSRCH8,OTHSRCH8,OTHSRCH8
+tenure,,,,,,,NATOCCH,TENUREH,TENUREH,TENURECF,TENURECF,TENURECF,TENURECF,TENURECF,TENURECF,TENURECF,TENURECF
+rent,,,,,,,WKRENTCH,WKRENTCH,WKRENTCH,WKRENTCH,WKRENTCH,WKRENTCH,WKRENTCH,WKRENTCH,WKRENTCH,WKRENTCH,WKRENTCH
+housing_costs,,,,,,,HCOSTSH,HCOSTSH,HCOSTSH,HCOSTSH,HCOSTSH,HCOSTSH,HCOSTSH,HCOSTSH,HCOSTSH,HCOSTSH,HCOSTSH
+landlord_type,,,,,,,LNDLDH,LNDLDH,LNDLDH,LDLRDHCF,LDLRDHCF,LDLRDHCF,LDLRDHCF,LDLRDHCF,LDLRDHCF,LDLRDHCF,LDLRDHCF
+state,,,,,,,STATEH,STATEH,STATEH,STATEHBC,STATEHBC,STATEHBC,STATEHBC,STATEHBC,STATEHBC,STATEHEC,STATEHEC
