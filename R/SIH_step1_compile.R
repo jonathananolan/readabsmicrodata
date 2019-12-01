@@ -1,93 +1,109 @@
 #' Import SIH data
 #'
-#' This function allows you to import HES microdata from various HES years, and combine them into a single tidy dataset.
-#' @param data_directory A directory with all the required files to run this function. /data contains all the HES DTA files. /HESvariables contains two files: HESkeyvariablenames.csv which is a list of the variables you want in your dataset and filenames.csv contains the filenames of each DTA file in your data folder.
-#' @keywords HES
+#' Import SAS microdata from various ABS datasets, and combine them into a single file with variables given more memorable names.
+#' @param survey A string containing the survey you want to import
+#' @param file A string containing the survey file of interest - usually household, income unit, or person.
+#' @param refyears A list of numbers containing the years you want to import. If blank all years imported.
+#' @param all_of_latest_year If TRUE, will import every variable in the most recent dataset. It will also then look at previous years datasets and import variables that have the same name and similar variable labels as the variables in the most recent dataset
+#' @param additional_variables A tibble with at least two columns "r_var_name" and the year of interest. Adds additional variables of interest on top of those that are already in the data dictionary. See vignette for more details
+#' @param variable_dictionary_v Version of the preloaded dictionary you wish to use
+#' @param grattandata Mark true if you want to use the SAS files in the Grattan Institute's data warehouse.
+#' @param file_names Only to be used if grattandata is false. A tibble with three columns: "Year","Filename" and "Formats", and a row for each year of the dataset you want to import.
+#' @param variable_dictionary Only to be used if you do not want to use the pre-loaded dictionary. A tibble in the prescribed format in the Vignette.
+#' @keywords SIH
 #' @export
 #' @examples
 #' @importFrom haven read_sas
 #' @import dplyr
 #' @import purrr
-#' @importFrom sjlabelled as_label
-
-import_SIH <- function(data_directory=getwd(),grattandata=FALSE) {
-  ### Read in data ----
-  #  library(tidyverse)
-
-  var_names  <- read.csv(system.file("extdata", "SIHkeyvariablenames.csv", package = "readabsmicrodata", mustWork = TRUE), stringsAsFactors=FALSE)
-  file_names <- read.csv(system.file("extdata", "SIHfilenames.csv",        package = "readabsmicrodata", mustWork = TRUE), stringsAsFactors=FALSE)
+#' @importFrom rio factorize
+#' @importFrom tibble enframe
+#' @importFrom stringr str_replace_all
 
 
-  # Years=2005
-  # data_directory="/Users/jnolan1/Dropbox (Grattan Institute)/Housing affordability/Data and analysis/Financial_stress_long"
-  # file_names = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/SIHfilenames.csv", stringsAsFactors=FALSE)
-  # var_names = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/SIHkeyvariablenames.csv", stringsAsFactors=FALSE)
-  # Yearchar <- as.character(Years)
-  # Year <- as.numeric(Yearchar)
+read_abs_microdata <- function(survey = "sih",
+                               file = "household",
+                               refyears = NULL,
+                               all_of_latest_year = TRUE,
+                               additional_variables = NULL,
+                               variable_dictionary_v = "1",
+                               grattandata = FALSE,
+                               file_names = NULL,
+                               variable_dictionary = NULL) {
 
 
+   library(rio)
+   library(tidyverse)
+   library(grattandata)
+   library(haven)
+   Years=2015
+   refyears = 2015
+   file_names = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/sih_household_filenames.csv", stringsAsFactors=FALSE)
+   variable_dictionary = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/sih_household_dictionary_v_1.csv", stringsAsFactors=FALSE,check.names = FALSE)
+   Yearchar <- as.character(Years)
+   Year <- as.numeric(Yearchar)
+   year = 2015
+   grattandata = TRUE
+   variable_dictionary = NULL
+   all_of_latest_year = TRUE
+   survey = "sih"
+   file = "household"
+   variable_dictionary_v = 1
+   additional_variables = NULL
+
+
+  #We want to import in the filenames of our SAS files. If Grattandata is true then the filenames are stored in the package, otherwise the
+  #user needs to provide their own filenames to the 'file_names' argument to the function.
+  if (grattandata == TRUE) {
+    file_names <- read.csv(system.file("extdata",
+                                       paste0(survey,"_",file,"_filenames.csv"),
+                                       package = "readabsmicrodata",
+                                       mustWork = TRUE),
+                           stringsAsFactors=FALSE)
+                           } else {}
+
+  # We walso want to import a data dictionary that matches up earlier years of the SIH.
+  # The reason we need a data dictionary is that sometimes the ABS changes the varaible names and labels (e.g. exp13 becomes exp 12).
+  # Manually matching up is the only way to make this process easier.
+  if (is.null(variable_dictionary)) {
+    variable_dictionary  <- read.csv(system.file("extdata",
+                                                 paste0(survey,"_",file,"_dictionary_v_",variable_dictionary_v,".csv"),
+                                                 package = "readabsmicrodata",
+                                                 mustWork = TRUE),
+                                     stringsAsFactors = FALSE,
+                                     check.names      = FALSE)
+  } else {}
+
+  #Figure out what years we want to analyse. If refyears is null it will try and import every year,
+  #otherwise it imports the list provided by the data dictionary
+  if (is.null(refyears)) {
+    years_HH <- file_names %>%  pull(Year) %>% rev()
+  } else {
+    years_HH <- refyears
+  }
+
+  #This process imports every variable from the most recent year, but also all the variables of previous year
+  #but only if the label and the variable name exactly match.
+
+  all_variables <- create_var_list(latest_year = latest_year,
+                                   variable_dictionary = variable_dictionary ,
+                                   years_HH = years_HH,
+                                   all_of_latest_year = all_of_latest_year,
+                                   grattandata = grattandata,
+                                   file_names = file_names,
+                                   additional_variables = additional_variables)
 
   ### HH ###
 
-  sih_importer_hh <- function(year,...)  {
-    #year=2015
-    #  grattandata=TRUE
-    #  library(grattandata)
-    #  library(tidyverse)
-    #  library(rio)
-    #  var_names <- import("inst/extdata/SIHkeyvariablenames.csv")
-    Yearchar = as.character(year)
-    if(grattandata==TRUE) {
-      filename <- file_names %>% filter(Year==year) %>%
-        mutate(full_path=paste0(Filename)) %>%
-        pull(full_path)
-
-      formats <- file_names %>% filter(Year==year) %>%
-        mutate_if(is.character, list(~na_if(., ""))) %>%
-        pull(Formats)
-
-      if(is.na(formats)) {
-       formats <- NULL}
-
-      SIH_raw <- read_microdata(filename,catalog_file = formats )
-
-      if(!is.null(formats)) {
-        SIH_raw <- SIH_raw %>% as_label()}
-    }
-
-    #change column names to a common one.
-    Columname <- paste0("SIH", Yearchar)
-    Varnamesfiltered <- filter(var_names, eval(parse(text=Columname))!="")
-
-    ##check if all the variable names are correct
-    ##test<-data.frame(key.vars, key.vars %in% names(SIH_raw))
-
-    key.names <- Varnamesfiltered$r_var_name %>% trimws()
-    key.vars <- eval(parse(text=paste0("Varnamesfiltered$SIH",Yearchar)))%>% trimws()
-    names(SIH_raw) <- toupper(names(SIH_raw))
-    SIH_raw <- SIH_raw[,key.vars]
-    colnames(SIH_raw) <- key.names
-
-    SIH_raw <- SIH_raw %>% mutate(refyear = year)
-
-    #inconsistent data types
-    SIH_raw$hh_id <- as.character(SIH_raw$hh_id)
-
-    if ("persons_15_over" %in% names(SIH_raw)) {
-    SIH_raw$persons_15_over <- as.character(SIH_raw$persons_15_over) }
-    if ("persons_under_15" %in% names(SIH_raw)) {
-      SIH_raw$persons_under_15 <- as.character(SIH_raw$persons_under_15) }
-    SIH_raw
 
 
-  }
 
-  years_HH <- file_names %>% filter(!(Year %in% c(1990,2000,1986))) %>%  pull(Year) %>% rev()
 
-    # file_names<- import("inst/extdata/SIHfilenames.csv")
-    # var_names<-read.csv("inst/extdata/SIHkeyvariablenames.csv", stringsAsFactors=FALSE)
+  # file_names<- import("inst/extdata/SIHfilenames.csv")
+  # variable_dictionary<-read.csv("inst/extdata/SIHkeyvariablenames.csv", stringsAsFactors=FALSE)
 
-map_df(years_HH,sih_importer_hh)
+  map_df(years_HH,import_and_filter_year)
 
 }
+
 

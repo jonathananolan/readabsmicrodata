@@ -2,8 +2,8 @@ Package: readabsmicrodata
 Type: Package
 Title: Cleans various ABS datasets
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: Jonathan Nolan
+Maintainer: Jonathan Nolan <jonathtana.a.nolan@gmail.com>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
@@ -11,7 +11,9 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
-    purrr
+    purrr,
+    rio,
+    stringi
 RoxygenNote: 6.1.1
 Remotes:
     MattCowgill/grattandata
