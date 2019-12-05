@@ -1,0 +1,15 @@
+Year,Filename,Formats,IU_or_HH,
+1985,ids86unt.sas7bdat,formats.sas7bcat,IU,
+1990,ids90unt.sas7bdat,formats.sas7bcat,IU,IDS90.FMT
+1994,ids94hsh.sas7bdat,formats.sas7bcat,HH,
+1996,ids96hsh.sas7bdat,formats.sas7bcat,,
+1999,ids99hsh.sas7bdat,formats.sas7bcat,HH,IDS00.FMT
+2000,ids00hsh.sas7bdat,formats.sas7bcat,,
+2003,sih03bh.sas7bdat,formats.sas7bcat,HH,
+2005,sih05bh64.sas7bdat,formats64.sas7bcat,HH,
+2007,sih08bh.sas7bdat,formats.sas7bcat,HH,
+2009,sih10bh64.sas7bdat,formats.sas7bcat,HH,
+2011,sih11bh.sas7bdat,formats.sas7bcat,HH,
+2013,sih13bh.sas7bdat,formats.sas7bcat,HH,
+2015,sih15bh.sas7bdat,sih_formats.sas7bcat,HH,
+2017,sih17bh.sas7bdat,formats.sas7bcat,HH,

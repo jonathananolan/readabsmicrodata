@@ -8,41 +8,7 @@
 #' @importFrom haven read_sas
 #' @importFrom rio factorize
 
-# Function that can import one year of the SIH
-import_year_filtered <- function(filter_cols = TRUE,
-                                 nrow = Inf,
-                                 ...) {
-  if (grattandata == TRUE) {
-    filename <- file_names %>%
-      filter(Year == year_num) %>%
-      pull(Filename)
 
-    formats <- file_names %>%
-      filter(Year == year_num) %>%
-      mutate_if(is.character, list(~ na_if(., ""))) %>%
-      pull(Formats)
-
-    if (is.na(formats)) {
-      formats <- NULL
-    }
-
-    filename_for_read_sas <- find_filename(filename)
-
-    catalog_file_for_read_sas <- paste0(dirname(filename_for_read_sas), "/", formats)
-
-    data <- read_sas(filename_for_read_sas,
-      catalog_file = catalog_file_for_read_sas,
-      col_select = one_of(variables_to_import),
-      n_max = nrow
-    ) %>%
-      factorize()
-
-    names(data) <- tolower(names(data))
-    data
-  } else {
-    print("Grattan data is false - but this function only works with Grattan data at the moment.")
-  }
-}
 
 # Function that can import one year of the SIH
 import_year_all <- function(year_num,
@@ -51,11 +17,15 @@ import_year_all <- function(year_num,
                             ...) {
   if (grattandata == TRUE) {
     filename <- file_names %>%
-      filter(Year == year) %>%
+      filter(Year == year_num,
+             survey == (!! survey),
+             file == (!! file)) %>%
       pull(Filename)
 
     formats <- file_names %>%
-      filter(Year == year) %>%
+      filter(Year == year_num,
+             survey == (!! survey),
+             file == (!! file)) %>%
       mutate_if(is.character, list(~ na_if(., ""))) %>%
       pull(Formats)
 
@@ -67,14 +37,11 @@ import_year_all <- function(year_num,
 
     catalog_file_for_read_sas <- paste0(dirname(filename_for_read_sas), "/", formats)
 
-    data <- read_sas(filename_for_read_sas,
+    read_sas(filename_for_read_sas,
       catalog_file = catalog_file_for_read_sas,
-      n_max = nrow
-    ) %>%
-      factorize()
+      n_max = nrow) %>%
+      factorize() %>% rename_all(tolower)
 
-    names(data) <- tolower(names(data))
-    data
   } else {
     print("Grattan data is false - but this function only works with Grattan data at the moment.")
   }
@@ -133,4 +100,3 @@ import_one_year <- function(year, ...) {
 }
 
 
-import_one_year(2000)

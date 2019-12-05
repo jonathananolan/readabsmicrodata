@@ -37,9 +37,9 @@ read_abs_microdata <- function(survey = "sih",
    library(grattandata)
    library(haven)
    Years=2015
-   refyears = 2015
-   file_names = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/sih_household_filenames.csv", stringsAsFactors=FALSE)
-   variable_dictionary = read.csv("/Users/jnolan1/Documents/GitHub/attractingreport/readabsmicrodata/inst/extdata/sih_household_dictionary_v_1.csv", stringsAsFactors=FALSE,check.names = FALSE)
+   refyears = NULL
+   file_names = read.csv("inst/extdata/filenames.csv", stringsAsFactors=FALSE)
+     = read.csv("inst/extdata/sih_household_dictionary_v_1.csv", stringsAsFactors=FALSE,check.names = FALSE)
    Yearchar <- as.character(Years)
    Year <- as.numeric(Yearchar)
    year = 2015
@@ -74,13 +74,6 @@ read_abs_microdata <- function(survey = "sih",
                                      check.names      = FALSE)
   } else {}
 
-  #Figure out what years we want to analyse. If refyears is null it will try and import every year,
-  #otherwise it imports the list provided by the data dictionary
-  if (is.null(refyears)) {
-    years_HH <- file_names %>%  pull(Year) %>% rev()
-  } else {
-    years_HH <- refyears
-  }
 
   #This process imports every variable from the most recent year, but also all the variables of previous year
   #but only if the label and the variable name exactly match.

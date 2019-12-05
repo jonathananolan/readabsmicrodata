@@ -11,7 +11,6 @@
 
 create_tibble_to_compare_dataframes <- function(year_extracted,
                                                 ...) {
-year_extracted = 2015
   dataset_no_rows <- import_year_all(year_extracted,
                                      filter_cols = FALSE,
                                      grattandata = grattandata,
@@ -80,19 +79,32 @@ year_extracted = 2015
 
 
 
-  latest_variable_dictionary <- variable_dictionary %>% select(year_extracted)
 extract_labels_df(dataset_no_rows) %>% mutate(string_value = tolower(value),
                                               string_value = str_replace_all(string_value,replacements),
                                               string_value = paste0(var_name,string_value),
-                                              year = year_extracted) %>%
-    filter(!var_name %in% latest_variable_dictionary)
+                                              year = year_extracted)
 
 }
 
 create_variable_dictionary <- function(...) {
   #Find the labels for each variable in the history of the dataset.
 
-  map_df(years_HH_c,create_tibble_to_compare_dataframes) %>%
-    group_by(string_value) %>%
-    mutate(latest_year = max(year)) }
+  years_HH <- create_refyear_list() %>% as.character()
 
+  map_df(years_HH,create_tibble_to_compare_dataframes) %>%
+    group_by(string_value) %>%
+    mutate(latest_year = max(year))
+  }
+
+
+
+variable_dictionary_long <- variable_dictionary %>%
+                            select(r_var_name,matches("1|2")) %>%
+                            gather("Year","var_name",-r_var_name) %>% filter(var_name!="")
+
+
+data<-create_variable_dictionary() %>% left_join(variable_dictionary_long)
+
+
+test = data %>% group_by(string_value) %>%
+  mutate(latest_year_1 = min(year))
