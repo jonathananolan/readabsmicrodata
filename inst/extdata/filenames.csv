@@ -1,4 +1,4 @@
-Year,Filename,Formats,file,survey
+Year,Filename,Formats,file_name,survey_name
 1982,ids82psn.sas7bdat,,person,sih
 1982,ids82unt.sas7bdat,,income_unitome_unit,sih
 1986,ids86unt.sas7bdat,formats.sas7bcat,income_unitome_unit,sih
@@ -36,7 +36,7 @@ Year,Filename,Formats,file,survey
 2007,sih08bi.sas7bdat,formats.sas7bcat,income_unitome_unit,sih
 2007,sih08bl.sas7bdat,formats.sas7bcat,income_unitome_unit,sih
 2007,sih08bp.sas7bdat,formats.sas7bcat,person,sih
-2007,sih10bh64.sas7bdat,formats.sas7bcat,household,sih
+2009,sih10bh64.sas7bdat,formats.sas7bcat,household,sih
 2009,sih10bi64.sas7bdat,formats.sas7bcat,income_unitome_unit,sih
 2009,sih10bl64.sas7bdat,formats.sas7bcat,income_unitome_unit,sih
 2009,sih10bp64.sas7bdat,formats.sas7bcat,income_unitome_unit,sih

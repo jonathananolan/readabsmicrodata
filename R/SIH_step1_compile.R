@@ -9,7 +9,7 @@
 #' @param variable_dictionary_v Version of the preloaded dictionary you wish to use
 #' @param grattandata Mark true if you want to use the SAS files in the Grattan Institute's data warehouse.
 #' @param file_names Only to be used if grattandata is false. A tibble with three columns: "Year","Filename" and "Formats", and a row for each year of the dataset you want to import.
-#' @param variable_dictionary Only to be used if you do not want to use the pre-loaded dictionary. A tibble in the prescribed format in the Vignette.
+#' @param dictionary_file Only to be used if you do not want to use the pre-loaded dictionary. A tibble in the prescribed format in the Vignette.
 #' @keywords SIH
 #' @export
 #' @examples
@@ -24,33 +24,13 @@
 read_abs_microdata <- function(survey = "sih",
                                file = "household",
                                refyears = NULL,
-                               all_of_latest_year = TRUE,
+                               import_vars = "all",
                                additional_variables = NULL,
                                variable_dictionary_v = "1",
                                grattandata = FALSE,
-                               file_names = NULL,
-                               variable_dictionary = NULL) {
-
-
-   library(rio)
-   library(tidyverse)
-   library(grattandata)
-   library(haven)
-   Years=2015
-   refyears = NULL
-   file_names = read.csv("inst/extdata/filenames.csv", stringsAsFactors=FALSE)
-     = read.csv("inst/extdata/sih_household_dictionary_v_1.csv", stringsAsFactors=FALSE,check.names = FALSE)
-   Yearchar <- as.character(Years)
-   Year <- as.numeric(Yearchar)
-   year = 2015
-   grattandata = TRUE
-   variable_dictionary = NULL
-   all_of_latest_year = TRUE
-   survey = "sih"
-   file = "household"
-   variable_dictionary_v = 1
-   additional_variables = NULL
-
+                               file_name_file = NULL,
+                               dictionary_file = NULL,
+                               create_html_dictionary = TRUE) {
 
   #We want to import in the filenames of our SAS files. If Grattandata is true then the filenames are stored in the package, otherwise the
   #user needs to provide their own filenames to the 'file_names' argument to the function.
@@ -60,43 +40,52 @@ read_abs_microdata <- function(survey = "sih",
                                        package = "readabsmicrodata",
                                        mustWork = TRUE),
                            stringsAsFactors=FALSE)
-                           } else {}
+  } else {
+    file_names <- read.csv("inst/extdata/filenames.csv", stringsAsFactors=FALSE)
+    }
+
+
 
   # We walso want to import a data dictionary that matches up earlier years of the SIH.
   # The reason we need a data dictionary is that sometimes the ABS changes the varaible names and labels (e.g. exp13 becomes exp 12).
   # Manually matching up is the only way to make this process easier.
-  if (is.null(variable_dictionary)) {
+  if (is.null(dictionary_file)) {
     variable_dictionary  <- read.csv(system.file("extdata",
                                                  paste0(survey,"_",file,"_dictionary_v_",variable_dictionary_v,".csv"),
                                                  package = "readabsmicrodata",
                                                  mustWork = TRUE),
                                      stringsAsFactors = FALSE,
                                      check.names      = FALSE)
-  } else {}
+    print("NOT ELSE")
+  } else {
+    variable_dictionary <- read.csv("inst/extdata/sih_household_dictionary_v_1.csv", stringsAsFactors=FALSE,check.names = FALSE)
+    print("ELSE")
+  }
 
+ years_HH <- create_refyear_list(refyears  = refyears,
+                                 file_names = file_names,
+                                 variable_dictionary = variable_dictionary,
+                                 survey = survey,
+                                 file = file)
 
-  #This process imports every variable from the most recent year, but also all the variables of previous year
-  #but only if the label and the variable name exactly match.
+   if (create_html_dictionary == TRUE) {
+     create_data_dictionary(paste0(survey,"_",file,"_dictionary.html"),
+                            variable_dictionary = variable_dictionary,
+                            years_HH = years_HH,
+                            grattandata = grattandata,
+                            file_names = file_names,
+                            survey = survey,
+                            file = file)
+     }
 
-  all_variables <- create_var_list(latest_year = latest_year,
-                                   variable_dictionary = variable_dictionary ,
-                                   years_HH = years_HH,
-                                   all_of_latest_year = all_of_latest_year,
-                                   grattandata = grattandata,
-                                   file_names = file_names,
-                                   additional_variables = additional_variables)
+ #variable_dictionary_with_new_names<- create_df_with_var_labels_and_dictionary_labels()
+ #map(years_HH,import_and_filter_year) %>% data.table::rbindlist(.,fill = TRUE)
+  }
 
-  ### HH ###
-
-
-
-
-
-  # file_names<- import("inst/extdata/SIHfilenames.csv")
-  # variable_dictionary<-read.csv("inst/extdata/SIHkeyvariablenames.csv", stringsAsFactors=FALSE)
-
-  map_df(years_HH,import_and_filter_year)
-
-}
-
-
+library(tidyverse)
+library(data.table)
+library(rio)
+library(Hmisc)
+library(grattandata)
+data<- read_abs_microdata(grattandata = TRUE,
+                   dictionary_file  = "test")

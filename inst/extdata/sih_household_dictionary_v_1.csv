@@ -23,12 +23,12 @@ wealth_net,,Yes,,,,,,,,,,WEALTHH,WEALTHH,WEALTHH,,WEALTHH,WEALTHH,WEALTHH,WEALTH
 liability_credit_card,other.financial.assets.grouped.debt,Yes,liability,,,,,,,,,LIACCCH,LIACCCH,LIACCCH,,LIACCCH,LIACCCH,LIACCCH,LIACCCH,LIACCCH
 liability_help,other.financial.assets.grouped.debt,Yes,liability,,,,,,,,,LIAHECCH,LIAHECCH,LIAHECCH,,LIAHECCH,LIAHECCH,LIAHECCH,LIAHECCH,LIAHECCH
 liability_investment,other.financial.assets.grouped.debt,Yes,liability,,,,,,,,,LIAINVCH,LIAINVCH,LIAINVCH,,LIAINVCH,LIAINVCH,LIAINVCH,LIAINVCH,LIAINVCH
-liability_oth_house,other.property.grouped.debt,Yes,liability,,,,,,,,,LIAOPCH,LIAOPCH,LIAOPCH,,LIAOPCH,LIAOPCH,LIAOPCH,LIAOPCH,LIAOPCH
+liability_inv_prop,other.property.grouped.debt,Yes,liability,,,,,,,,,LIAOPCH,LIAOPCH,LIAOPCH,,LIAOPCH,LIAOPCH,LIAOPCH,LIAOPCH,LIAOPCH
 liability_loans,other.financial.assets.grouped.debt,Yes,liability,,,,,,,,,LIAOTCH,LIAOTCH,LIAOTCH,,LIAOTCH,LIAOTCH,LIAOTCH,LIAOTCH,LIAOTCH
-liability_oth_all_house,other.property.grouped.debt,Yes,liability,,,,,,,,,LIARPCH,LIARPCH,LIARPCH,,LIARPCH,LIARPCH,LIARPCH,LIARPCH,LIARPCH
-liability_house,home.grouped.debt,Yes,liability,,,,,,,,,LIASDCH,LIASDCH,LIASDCH,,LIASDCH,LIASDCH,LIASDCH,LIASDCH,LIASDCH
+liability_inv_prop_oth,other.property.grouped.debt,Yes,liability,,,,,,,,,LIARPCH,LIARPCH,LIARPCH,,LIARPCH,LIARPCH,LIARPCH,LIARPCH,LIARPCH
+liability_home,home.grouped.debt,Yes,liability,,,,,,,,,LIASDCH,LIASDCH,LIASDCH,,LIASDCH,LIASDCH,LIASDCH,LIASDCH,LIASDCH
 liability_student,other.financial.assets.grouped.debt,Yes,liability,,,,,,,,,LIASFSCH,LIASFSCH,LIASFSCH,,LIASFSCH,LIASFSCH,LIASFSCH,LIASFSCH,LIASFSCH
-liability_car_loans,all.other.wealth.grouped.debt,Yes,liability,,,,,,,,,LIAVECH,LIAVECH,LIAVECH,,LIAVECH,LIAVECH,LIAVECH,LIAVECH,LIAVECH
+liability_car,all.other.wealth.grouped.debt,Yes,liability,,,,,,,,,LIAVECH,LIAVECH,LIAVECH,,LIAVECH,LIAVECH,LIAVECH,LIAVECH,LIAVECH
 asset_house,home.grouped.value,Yes,asset,,,,,,,,,HVALUECH,HVALUECH,HVALUECH,,HVALUECH,HVALUECH,HVALUECH,HVALUECH,HVALUECH
 asset_contents,all.other.wealth.grouped.value,Yes,asset,,,,,,,,,VCONTCH,VCONTCH,VCONTCH,,VCONTCH,VCONTCH,VCONTCH,VCONTCH,VCONTCH
 asset_bonds,other.financial.assets.grouped.value,Yes,asset,,,,,,,,,VDEBCH,VDEBCH,VDEBCH,,VDEBCH,VDEBCH,VDEBCH,VDEBCH,VDEBCH

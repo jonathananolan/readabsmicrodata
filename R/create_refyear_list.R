@@ -1,9 +1,15 @@
 #Figure out what years we want to analyse. If refyears is null it will try and import every year,
 #otherwise it imports the list provided by the data dictionary
-create_refyear_list <- function() {
+create_refyear_list <- function (refyears,
+                                file_names ,
+                                variable_dictionary,
+                                survey,
+                                file,
+                                ...) {
   if (is.null(refyears)) {
-    file_name_refyears <- file_names %>%  filter(survey == (!! survey),
-                           file == (!! file)) %>%
+    file_name_refyears <- file_names %>%
+                            filter(survey_name == survey,
+                                     file_name == file) %>%
                            select(Year) %>%
       as_tibble()
 
@@ -13,16 +19,16 @@ create_refyear_list <- function() {
                            tibble(Year =.)
 
 
-    file_names_missing <- anti_join(file_name_refyears,dictionary_refyears, by = "Year") %>% pull(Year)
+    dictionary_missing <- anti_join(file_name_refyears,dictionary_refyears, by = "Year") %>% pull(Year)
 
     if(!is_empty(dictionary_missing)){
-      print(paste0("The following years are in your dictionary file but not in your file name file:",file_names_missing))
+      print(paste0("The following years are in your dictionary file but not in your file name file: ",paste(dictionary_missing,sep = ", ")))
     }
 
-    file_names_missing <- anti_join(dictionary_refyears,file_name_refyears, by = "Year")
+    file_names_missing <- anti_join(dictionary_refyears,file_name_refyears, by = "Year") %>% pull(Year)
 
      if(!is_empty(file_names_missing)){
-      print(paste0("The following years are in your dictionary file but not in your file name file:", file_names_missing))
+      print(paste0("The following years are in your filename file but not in your dictionary file: ", paste(file_names_missing,sep = ", ")))
      }
 
     inner_join(file_name_refyears,dictionary_refyears, by = "Year") %>% pull(Year)
