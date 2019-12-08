@@ -4,7 +4,10 @@
 #' @import dplyr
 #' @importFrom haven read_sas
 #' @importFrom rio factorize
-#' @importFrom purr map_dfr
+#' @importFrom purrr map_dfr
+#' @importFrom tibble rowid_to_column enframe
+#' @importFrom tidyr gather
+#' @importFrom stringr str_replace_all
 
 extract_labels_col <- function(df, col) {
 
@@ -18,6 +21,7 @@ extract_labels_col <- function(df, col) {
 extract_labels_df <- function(df) {
   df_labels <- map_dfr(colnames(df),
                        ~ extract_labels_col(df = df, col = .))
+
   tibble(var_name = names(df)) %>%
     filter(!(var_name %in% df_labels$var_name)) %>%
     bind_rows(df_labels)
@@ -27,7 +31,11 @@ extract_labels_df <- function(df) {
 create_df_with_var_labels_one_year <- function(year_extracted,
                                                grattandata,
                                                file_names,
+                                               file,
+                                               survey,
+                                               data_dir,
                                                ...) {
+
 
   dataset_no_rows <- import_year(year_extracted,
                                  filter_cols = FALSE,
@@ -35,6 +43,7 @@ create_df_with_var_labels_one_year <- function(year_extracted,
                                  file_names = file_names,
                                  file = file,
                                  survey = survey,
+                                 data_dir = data_dir,
                                  nrow = 0)
 
 
@@ -116,15 +125,16 @@ create_df_with_var_labels_multiple_years <- function(variable_dictionary,
                                                      file_names,
                                                      file,
                                                      survey,
+                                                     data_dir,
                                                      ...) {
   #Find the labels for each variable in the history of the dataset.
 
   map_df(as.character(years_HH), ~create_df_with_var_labels_one_year(.,grattandata = grattandata,
                                                                      variable_dictionary = variable_dictionary,
                                                                      file_names = file_names,
-                                                                     file = file,
-                                                                     survey = survey
-                                                                    )) %>%
+                                                                     file =  file,
+                                                                     survey = survey,
+                                                                     data_dir = data_dir)) %>%
     group_by(string_value) %>%
     mutate(latest_year = max(year)) %>%
     ungroup() %>%
@@ -139,7 +149,9 @@ create_df_with_var_labels_and_dictionary_labels <- function(variable_dictionary,
                                                             file_names,
                                                             file,
                                                             survey,
-                                                            ...) {
+                                                            data_dir) {
+
+
   variable_dictionary_long <- variable_dictionary %>%
     select(r_var_name,matches("1|2")) %>%
     rowid_to_column(var = "rowid") %>%
@@ -151,7 +163,8 @@ create_df_with_var_labels_and_dictionary_labels <- function(variable_dictionary,
                                            grattandata = grattandata,
                                            file_names = file_names,
                                            file = file,
-                                           survey = survey) %>%
+                                           survey = survey,
+                                           data_dir = data_dir) %>%
     left_join(variable_dictionary_long, by = c("var_name", "year") )%>%
     mutate(dictionary_var = if_else(is.na(r_var_name),0,1),
            var = case_when(!is.na(r_var_name) ~ r_var_name,

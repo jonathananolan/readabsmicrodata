@@ -13,7 +13,13 @@ Imports:
     dplyr,
     purrr,
     rio,
-    stringi
+    stringi,
+    grattan,
+    tibble,
+    tidyr,
+    stringr,
+    tools,
+    markdown
 RoxygenNote: 6.1.1
 Remotes:
     MattCowgill/grattandata

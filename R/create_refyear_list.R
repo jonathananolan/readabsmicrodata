@@ -1,11 +1,23 @@
-#Figure out what years we want to analyse. If refyears is null it will try and import every year,
 #otherwise it imports the list provided by the data dictionary
-create_refyear_list <- function (refyears,
-                                file_names ,
+
+
+#' Create refyear list
+#'
+#' Figure out what years we want to analyse. If refyears is null it will try and import every year
+#' Otherwise it imports the list provided by the data dictionary
+#' @keywords SIH
+#' @import dplyr
+#' @import purrr
+
+
+create_refyear_list <- function (refyears=NULL,
+                                file_names,
                                 variable_dictionary,
                                 survey,
                                 file,
                                 ...) {
+
+
   if (is.null(refyears)) {
     file_name_refyears <- file_names %>%
                             filter(survey_name == survey,
@@ -37,3 +49,4 @@ create_refyear_list <- function (refyears,
     refyears
   }
 }
+
