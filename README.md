@@ -32,7 +32,6 @@ To run the package you will need to first download the SAS version of the HES or
 Now you can import many years of the dataset.
 
 ``` r
-# If the `remotes` package is not installed, install it
 library(readabsmicrodata)
 
 data<- read_abs_microdata(survey = "hes",
@@ -44,7 +43,6 @@ data<- read_abs_microdata(survey = "hes",
 If you work at grattan and have access to the grattan data warehouse, you can instead run: 
 
 ``` r
-# If the `remotes` package is not installed, install it
 library(readabsmicrodata)
 
 data<- read_abs_microdata(survey  = "hes",
