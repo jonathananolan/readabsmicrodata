@@ -81,7 +81,8 @@ import_year_filtered<- function(year_num,
               grattandata = grattandata,
               data_dir = data_dir) %>%
               factorize() %>%
-    rename_at(vars(filtered_vars_lower), ~ new_vars_lower)
+    rename_at(vars(filtered_vars_lower), ~ new_vars_lower) %>%
+    mutate(year =year_num )
 
       }
 

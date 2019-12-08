@@ -116,7 +116,6 @@ rbindlist(data,fill = TRUE)
 # library(haven)
 # library(grattandata)
 # library(kableExtra)
-#data<- read_abs_microdata(survey = "hes",data_dir = "K:/dropbox/Dropbox (Grattan Institute)/data/microdata/abs")
 
 
 
