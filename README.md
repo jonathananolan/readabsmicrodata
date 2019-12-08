@@ -35,7 +35,9 @@ Now you can import many years of the dataset.
 # If the `remotes` package is not installed, install it
 library(readabsmicrodata)
 
-data<- read_abs_microdata(survey = "hes","household",data_dir="C:/data")
+data<- read_abs_microdata(survey = "hes",
+						  file   = "household",
+						  data_dir="C:/data")
 
 ```
 
@@ -45,7 +47,9 @@ If you work at grattan and have access to the grattan data warehouse, you can in
 # If the `remotes` package is not installed, install it
 library(readabsmicrodata)
 
-data<- read_abs_microdata(survey = "hes","household",grattan=TRUE)
+data<- read_abs_microdata(survey  = "hes",
+						  file    = "household",
+						  grattan = TRUE)
 
 ```
 
