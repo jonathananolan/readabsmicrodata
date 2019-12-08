@@ -34,6 +34,7 @@ read_abs_microdata <- function(survey = "sih",
                                create_html_dictionary = TRUE
                                ) {
 
+  print("Importing survey filenames")
   #We want to import in the filenames of our SAS files. If Grattandata is true then the filenames are stored in the package, otherwise the
   #user needs to provide their own filenames to the 'file_names' argument to the function.
   if (is.null(file_name_file)) {
@@ -47,7 +48,7 @@ read_abs_microdata <- function(survey = "sih",
   }
 
 
-
+  print("Importing survey data dictionary")
   # We walso want to import a data dictionary that matches up earlier years of the SIH.
   # The reason we need a data dictionary is that sometimes the ABS changes the varaible names and labels (e.g. exp13 becomes exp 12).
   # Manually matching up is the only way to make this process easier.
@@ -84,6 +85,7 @@ read_abs_microdata <- function(survey = "sih",
                                                                                       )
 
    if (create_html_dictionary == TRUE) {
+     print("Creating HTML data dictionary")
      create_data_dictionary(data_dictionary_url = paste0(survey,"_",file,"_dictionary.html"),
                             variable_dictionary = variable_dictionary,
                             years_HH = years_HH,
@@ -94,7 +96,7 @@ read_abs_microdata <- function(survey = "sih",
                             variable_dictionary_with_new_names = variable_dictionary_with_new_names)
      }
 
-
+ print("Importing data")
  data<- map(years_HH,~import_year_filtered(.,year_num,
                                     variable_dictionary_with_new_names = variable_dictionary_with_new_names,
                                     survey = survey,

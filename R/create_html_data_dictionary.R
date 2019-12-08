@@ -30,6 +30,8 @@ body <- c('---',
                    '',
                    '## `r survey`, `r file` file',
                    '## Variables in the dataset',
+                   '`r opts_knit$set(progress=FALSE, verbose=FALSE,message = FALSE)`',
+                    'r options(KNITR_PROGRESS = FALSE)',
                    'New variable names have been created for each variable in the dataset.',
                    '',
                    'Variable names are first assigned using the data dictionary.',
@@ -42,7 +44,7 @@ for (i in 1:length(list_of_tables)) {
   text<- c(paste0('### `r list_of_tables[[',i,']][1]`'),
            '',
            paste0('Most recently apeared in the dataset in `r list_of_tables[[',i,']][2]`'),
-           '```{r echo=FALSE}',
+           '```{r echo=FALSE,progress=FALSE, verbose=FALSE,message = \'hide\',progress = FALSE}',
            paste0('list_of_tables[[',i,']][3] %>% kable()'),
            '```')
   body <- c(body,text)
