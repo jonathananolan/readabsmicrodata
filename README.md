@@ -56,3 +56,34 @@ This function will bind together every year of your dataset into one big datafra
 For less common variables, the original name has been kept, with the addition of a suffix for the year, e.g. famcomp_2017. Where variables are used in multiple years, and the variable label is very similar in both years, the most recent year is assigned to variables for both years. This reduces the risk of merging two variables with the same name that different meanings across different years. 
 
 When you run read_abs_microdata a data dictionary will be created to help you compare each variable. There's no subsitute for reading the ABS microdata userguide and checking for changes, but this is a good start. 
+
+
+There's a few other functions that might help you analyse the HES and SIH too: 
+
+``` r
+       fix_old_vars() %>%    
+```
+
+Will take old surveys with variables in cents instead of dollars, and weights that need dividing by 10,000 - and fix them. 
+
+``` r
+inflate_survey(to_year = "2019-20")
+```
+Will take any item in the data dictionary marked "inflate" and inflate it to the year you specify
+
+``` r
+equivalise_survey()
+```
+Will take any item in the data dictionary marked "inflate" and divide it by the ABS household equivalisation factor. For earlier years we construct an equivalisation factor from the component variables. 
+
+``` r
+add_ages()
+```
+
+Adds ages in 5, 10 and 20 year groupings. Be careful at the higher age groups in earlier years, because we have not yet included the "75+" groupings as separate categories. 
+
+``` r
+add_cohorts()
+```
+
+Adds date of birth groupings in 5,10 and 20 year cohorts. These cohorts are slightly imprecise due to a change in the interval of HES surveys in 2009 and 2015. 
