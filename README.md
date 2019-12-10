@@ -14,7 +14,7 @@ if(!require(remotes)) {
 }
 
 # Install `grattandata` from GitHub using remotes like this:
-remotes::install_github("readabsmicrodata",
+remotes::install_github("jonathananolan/readabsmicrodata",
                         dependencies = TRUE, 
                         upgrade = "always", 
                         build_vignettes = TRUE)
