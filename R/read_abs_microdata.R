@@ -52,22 +52,14 @@ read_abs_microdata <- function(survey = "sih",
   # We walso want to import a data dictionary that matches up earlier years of the SIH.
   # The reason we need a data dictionary is that sometimes the ABS changes the varaible names and labels (e.g. exp13 becomes exp 12).
   # Manually matching up is the only way to make this process easier.
-  if (is.null(dictionary_file)) {
-    variable_dictionary  <- read.csv(system.file("extdata",
-                                                 paste0(survey,"_",file,"_dictionary_v_",variable_dictionary_v,".csv"),
-                                                 package = "readabsmicrodata",
-                                                 mustWork = TRUE),
-                                     stringsAsFactors = FALSE,
-                                     check.names      = FALSE)
-  } else {
-    variable_dictionary <- dictionary_file
-  }
-
-  if(!is.null(additional_variables)) {
-    variable_dictionary<- bind_rows(variable_dictionary,additional_variables)
-  }
 
 
+
+  variable_dictionary <- import_dictionary(survey = survey,
+                                           file = file,
+                                           dictionary_file = dictionary_file,
+                                           additional_variables = additional_variables,
+                                           variable_dictionary_v = variable_dictionary_v)
 
  years_HH <- create_refyear_list(refyears  = refyears,
                                  file_names = file_names,
@@ -105,7 +97,8 @@ read_abs_microdata <- function(survey = "sih",
                                     grattandata = grattandata,
                                     data_dir = data_dir))
 
-rbindlist(data,fill = TRUE)
+rbindlist(data,fill = TRUE) %>% mutate(survey = (!! survey),
+                                         file = (!! file ))
   }
 
 
