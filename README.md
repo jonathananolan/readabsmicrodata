@@ -13,11 +13,17 @@ if(!require(remotes)) {
   install.packages("remotes")
 }
 
-# Install `grattandata` from GitHub using remotes like this:
+# Install `readabsmicrodata` from GitHub using remotes like this:		
+install.packages("kableExtra")
+remotes::install_github("grattan/grattandata",
+                        dependencies = TRUE, 
+                        upgrade = "always", 
+                        build_vignettes = TRUE)
 remotes::install_github("jonathananolan/readabsmicrodata",
                         dependencies = TRUE, 
                         upgrade = "always", 
                         build_vignettes = TRUE)
+
 ```
 
 ## About the package
