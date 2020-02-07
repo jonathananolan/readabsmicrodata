@@ -167,15 +167,35 @@ data %>% mutate(age_approx = as.numeric(stri_extract_last_regex(age, "\\d{2}")))
 #'
 
 add_cohorts <- function(data){
-  cohorts <- read.csv( system.file("extdata", paste0("cohorts_",first(data$survey),".csv"), package = "readabsmicrodata", mustWork = TRUE),check.names = FALSE,stringsAsFactors = FALSE) %>%
-    gather("year","cohort",-age_type,-age) %>%
-    mutate(year = as.numeric(year))
+  cohort_5y_breaks   = c(-Inf,seq(1924,1984,5),Inf)
+  cohort_5y_top      = c(seq(1924,1984,5),Inf)
+  cohort_5y_bottom   = c(-Inf,cohort_5y_top[2:13]-4,1985)
+  cohort_5y_labels   = paste0(cohort_5y_bottom,"-",cohort_5y_top)
 
-  cohort_5  <- cohorts %>% filter(age_type == "age_5") %>%  rename(cohort_5y  = cohort,age_5  = age) %>% select(-age_type)
-  cohort_10 <- cohorts %>% filter(age_type == "age_10") %>% rename(cohort_10y = cohort,age_10 = age) %>% select(-age_type)
-  cohort_20 <- cohorts %>% filter(age_type == "age_20") %>% rename(cohort_20y = cohort,age_20 = age) %>% select(-age_type)
+  cohort_10y_breaks   = c(-Inf,seq(1924,1984,10),Inf)
+  cohort_10y_top      = c(seq(1924,1984,10),Inf)
+  cohort_10y_bottom   = c(-Inf,cohort_10y_top[2:7]-9,1985)
+  cohort_10y_labels   = paste0(cohort_10y_bottom,"-",cohort_10y_top)
 
-  data %>% left_join(cohort_5) %>%
-    left_join(cohort_10) %>%
-    left_join(cohort_20)
+  cohort_20y_breaks   = c(-Inf,seq(1924,1984,20),Inf)
+  cohort_20y_top      = c(seq(1924,1984,20),Inf)
+  cohort_20y_bottom   = c(-Inf,cohort_20y_top[2:4]-20,1985)
+  cohort_20y_labels   = paste0(cohort_20y_bottom,"-",cohort_20y_top)
+
+data %>% mutate(year_for_cohorts = if_else(year == 2009, 2008, year),
+                         year_of_birth_approx = case_when(grepl("and over",age) ~ NA_real_,
+                                                          grepl("or older",age) ~ NA_real_,
+                                                          TRUE ~ year_for_cohorts - age_approx),
+                         cohort_5y = as.character(cut(year_of_birth_approx,
+                                                      breaks = cohort_5y_breaks,
+                                                      labels = cohort_5y_labels,
+                                                      include.lowest = FALSE)),
+                         cohort_10y = as.character(cut(year_of_birth_approx,
+                                                       breaks = cohort_10y_breaks,
+                                                       labels = cohort_10y_labels,
+                                                       include.lowest = FALSE)),
+                         cohort_20y = as.character(cut(year_of_birth_approx,
+                                                       breaks = cohort_20y_breaks,
+                                                       labels = cohort_20y_labels,
+                                                       include.lowest = FALSE)))
 }

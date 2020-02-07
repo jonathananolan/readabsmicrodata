@@ -8,8 +8,8 @@ weight,,,,,HESHHWT,HESHHWT,HESHHWT
 equiv_hh,,,,,EQUIVH,EQUIVH,EQUIVH
 fam_comp,,DCOMP,DCOMP,DCOMP,DCOMPH,DCOMPH,DCOMPH
 net_wealth,Yes,,,,,WEALTHH,WEALTHH
-income__disposable_0304,,DINC,DINC,DINC,DISPCH,,
-income_disposable_0506,,,,,,DISPSCH,DISPSCH
+income__disposable_0304,Yes,DINC,DINC,DINC,DISPCH,,
+income_disposable_0506,Yes,,,,,DISPSCH,DISPSCH
 income_disposable_0708,Yes,,,,,DISPSCH8,DISPSCH8
 tot_income,Yes,TOTINCHH,ITINC,ITINC,INCTOTCH,INCTSCH8,INCTSCH8
 exp_housing,Yes,,,,EXP01,EXP01,EXP01
