@@ -182,6 +182,14 @@ add_cohorts <- function(data){
   cohort_20y_bottom   = c(-Inf,cohort_20y_top[2:4]-20,1985)
   cohort_20y_labels   = paste0(cohort_20y_bottom,"-",cohort_20y_top)
 
+  print("Note that for the 2009 dataset, years were supplied by the ABS in 5 year")
+        print(        "groups and yet this survey was conducted 6 years after the 2003 survey.")
+print(  "For cohort group, the year of birth is adjusted one year down so that every")
+print(        "person belongs to the cohort 1 year older than their actual age.")
+print(        "This means for those on the edge of each DOB cohort, their allocation will be")
+print(        "slightly incorrect. Because the 2015 microdata supplied individual ages,")
+        print(        "this adjustment did not need to be made in 2015.")
+
 data %>% mutate(year_for_cohorts = if_else(year == 2009, 2008, year),
                          year_of_birth_approx = case_when(grepl("and over",age) ~ NA_real_,
                                                           grepl("or older",age) ~ NA_real_,
