@@ -1,10 +1,6 @@
 ---
 title: "Quasi-long analysis with HES"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Put the title of your vignette here}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -132,7 +128,7 @@ data<- read_abs_microdata(survey = "hes",
 
 Now we have a nice clean dataset - analysis is relatively simple:
 
-```{r}
+```{r warnings = FALSE}
 data %>%
   filter(!is.na(cohort_5y),
          cohort_5y!="",
