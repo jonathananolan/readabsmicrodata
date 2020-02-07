@@ -23,3 +23,5 @@ Imports:
 RoxygenNote: 6.1.1
 Remotes:
     MattCowgill/grattandata
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
