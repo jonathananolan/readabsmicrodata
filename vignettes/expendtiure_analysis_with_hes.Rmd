@@ -132,7 +132,9 @@ Now we have a nice clean dataset - analysis is relatively simple:
 data %>%
   filter(!is.na(cohort_5y),
          cohort_5y!="",
-         cohort_5y == c("1930-1934","1925-1929")) %>%
+         cohort_5y == c("1935-1939",
+                        "1930-1934",
+                        "1925-1929")) %>%
   group_by(cohort_5y,
            year) %>%
   summarise(mpg = list(enframe(wtd.quantile(exp_total_g_s,
@@ -159,6 +161,7 @@ data %>%
 ```
 
 Grouping by expenditure percentile is simple and easy. We can do by quintile as well but our sample size starts to look vanishingly small. 
+
 ```{r }
 
   data %>%
