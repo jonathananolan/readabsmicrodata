@@ -4,9 +4,17 @@
 \alias{create_data_dictionary}
 \title{Create html data dictionary}
 \usage{
-create_data_dictionary(data_dictionary_url, variable_dictionary, years_HH,
-  grattandata, file_names, survey, file,
-  variable_dictionary_with_new_names, ...)
+create_data_dictionary(
+  data_dictionary_url,
+  variable_dictionary,
+  years_HH,
+  grattandata,
+  file_names,
+  survey,
+  file,
+  variable_dictionary_with_new_names,
+  ...
+)
 }
 \description{
 Create html data dictionary

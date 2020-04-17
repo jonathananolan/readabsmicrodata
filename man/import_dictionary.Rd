@@ -4,8 +4,13 @@
 \alias{import_dictionary}
 \title{Import data dictionary}
 \usage{
-import_dictionary(survey, file, dictionary_file = NULL,
-  additional_variables = NULL, variable_dictionary_v = 1)
+import_dictionary(
+  survey,
+  file,
+  dictionary_file = NULL,
+  additional_variables = NULL,
+  variable_dictionary_v = 1
+)
 }
 \arguments{
 \item{survey}{A string containing the survey you want to import. Usually "hes" or "sih"}

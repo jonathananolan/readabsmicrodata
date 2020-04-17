@@ -4,8 +4,17 @@
 \alias{import_year}
 \title{Import a single year of your chosen dataset}
 \usage{
-import_year(year_num, filter_vars = NULL, nrow = Inf, survey, file,
-  file_names, grattandata, data_dir, ...)
+import_year(
+  year_num,
+  filter_vars = NULL,
+  nrow = Inf,
+  survey,
+  file,
+  file_names,
+  grattandata,
+  data_dir,
+  ...
+)
 }
 \description{
 See \code{magrittr::\link[magrittr]{\%>\%}} for details.

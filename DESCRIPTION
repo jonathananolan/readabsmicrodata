@@ -19,8 +19,9 @@ Imports:
     tidyr,
     stringr,
     tools,
-    markdown
-RoxygenNote: 6.1.1
+    markdown,
+    haven
+RoxygenNote: 7.0.2
 Remotes:
     MattCowgill/grattandata
 Suggests: knitr, rmarkdown

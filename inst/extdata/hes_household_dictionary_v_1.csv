@@ -8,10 +8,10 @@ weight,,,,,HESHHWT,HESHHWT,HESHHWT
 equiv_hh,,,,,EQUIVH,EQUIVH,EQUIVH
 fam_comp,,DCOMP,DCOMP,DCOMP,DCOMPH,DCOMPH,DCOMPH
 net_wealth,Yes,,,,,WEALTHH,WEALTHH
-income__disposable_0304,Yes,DINC,DINC,DINC,DISPCH,,
+income_disposable_0304,Yes,DINC,DINC,DINC,DISPCH,,
 income_disposable_0506,Yes,,,,,DISPSCH,DISPSCH
 income_disposable_0708,Yes,,,,,DISPSCH8,DISPSCH8
-tot_income,Yes,TOTINCHH,ITINC,ITINC,INCTOTCH,INCTSCH8,INCTSCH8
+income_total,Yes,TOTINCHH,ITINC,ITINC,INCTOTCH,INCTSCH8,INCTSCH8
 exp_housing,Yes,,,,EXP01,EXP01,EXP01
 exp_fuel,Yes,,,,EXP02,EXP02,EXP02
 exp_food,Yes,,,,EXP03,EXP03,EXP03
@@ -56,11 +56,11 @@ children_number_1,,PSNSU2,D1AGE,D1AGE,,,
 children_number_2,,PSNS4,D2AGE,D2AGE,,,
 children_number_3,,PSNS12,D3AGE,D3AGE,,,
 children_number_4,,PSNS14,D4AGE,D4AGE,,,
-final_income,Yes,FINC,FINC,FINC,FINC,FINC,
-total_taxes,Yes,,,TTAX,TTAX,TTAX,
-total_taxes_cents,,TTAX,TTAX,,,,
-total_benefits,Yes,,,TBEN,TBEN,TBEN,TBEN
-total_benefits_cents,,TBEN,TBEN,,,,
+income_final,Yes,FINC,FINC,FINC,FINC,FINC,
+income_tax,Yes,,,TTAX,TTAX,TTAX,
+income_tax_cents,,TTAX,TTAX,,,,
+benefits_total,Yes,,,TBEN,TBEN,TBEN,TBEN
+benefits_total_cents,,TBEN,TBEN,,,,
 total_dir_benefits,Yes,DBEN,DBEN,DBEN,DBEN,DBEN,DBEN
 total_ind_benefits,Yes,,,IBEN,IBEN,IBEN,IBEN
 total_ind_benefits_cents,,IBEN,IBEN,,,,
@@ -96,7 +96,7 @@ motrgage_house,,,,,,TRPAY1CH,TRPAY1CH
 landlord_type,,,,,,LDLRDHCF,LDLRDHCF
 labour_force_status,,,,,,LFSRH,LFSRH
 disp_income_prev_year,,,,,,,DISPPH8
-kids_dependent,,,,,,,DPKIDHBC
+kids_dependent_u25,,,,,,,DPKIDHBC
 liability_credit_card,Yes,,,,,,LIACCCH
 liability_help,Yes,,,,,,LIAHECCH
 liability_investment,Yes,,,,,,LIAINVCH
@@ -124,3 +124,4 @@ asset_shares,Yes,,,,,,VSHARCH
 asset_partnership,Yes,,,,,,VSIPCH
 asset_business_unincorp,Yes,,,,,,VUBUSCH
 asset_car,Yes,,,,,,VVEHICH
+child_youngest_age,,,,,,,agekidh

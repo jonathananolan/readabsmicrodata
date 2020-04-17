@@ -4,11 +4,19 @@
 \alias{read_abs_microdata}
 \title{Import SIH data}
 \usage{
-read_abs_microdata(survey = "sih", file = "household",
-  refyears = NULL, data_dir = getwd(), import_vars = "all",
-  additional_variables = NULL, variable_dictionary_v = "1",
-  grattandata = FALSE, file_name_file = NULL, dictionary_file = NULL,
-  create_html_dictionary = TRUE)
+read_abs_microdata(
+  survey = "sih",
+  file = "household",
+  refyears = NULL,
+  data_dir = getwd(),
+  import_vars = "all",
+  additional_variables = NULL,
+  variable_dictionary_v = "1",
+  grattandata = FALSE,
+  file_name_file = NULL,
+  dictionary_file = NULL,
+  create_html_dictionary = TRUE
+)
 }
 \arguments{
 \item{survey}{A string containing the survey you want to import. Usually "hes" or "sih"}

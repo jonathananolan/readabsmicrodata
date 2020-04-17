@@ -4,8 +4,14 @@
 \alias{create_refyear_list}
 \title{Create refyear list}
 \usage{
-create_refyear_list(refyears = NULL, file_names, variable_dictionary,
-  survey, file, ...)
+create_refyear_list(
+  refyears = NULL,
+  file_names,
+  variable_dictionary,
+  survey,
+  file,
+  ...
+)
 }
 \description{
 Figure out what years we want to analyse. If refyears is null it will try and import every year
